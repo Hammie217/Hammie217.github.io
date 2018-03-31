@@ -1,0 +1,143 @@
+html{
+  overflow-x: hidden;
+}
+
+/* Style the links inside the sidenav */
+#mySidenav a {
+    position: absolute; /* Position them relative to the browser window */
+    right: -10px; /* Position them outside of the screen */
+    transition: 0.3s; /* Add transition on hover */
+    padding: 15px; /* 15px padding */
+    width: 120px; /* Set a specific width */
+    text-decoration: none; /* Remove underline */
+    font-size: 20px; /* Increase font size */
+    color: white; /* White text color */
+    border-radius: 5px 0px 0px 5px; /* Rounded corners on the top right and bottom right side */
+    z-index:1;
+}
+
+#mySidenav a:hover {
+    right: 0; /* On mouse-over, make the elements appear as they should */
+}
+
+/* The about link: 20px from the top with a green background */
+#about {
+    top: 20px;
+    background-color: #4CAF50;
+}
+
+#blog {
+    top: 80px;
+    background-color: #2196F3; /* Blue */
+}
+
+#projects {
+    top: 140px;
+    background-color: #f44336; /* Red */
+}
+
+#contact {
+    top: 200px;
+    background-color: #555 /* Light Black */
+}
+
+.BackInBlack{
+  background-color: #222222;
+}
+
+.Middle{
+      width:60%;
+      height:200px;
+      position:absolute;
+      top:50%;
+      margin:-30vh 0 0 25%;
+  }
+.mainName{
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 5vw;
+}
+.UppermainName{
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 5vw;
+}
+.Middle2{
+      text-align: center;
+      margin-top: 20px;
+  }
+
+.fa-lg{
+  margin-right: 1.5vw;
+}
+a { color: inherit; }
+a:hover {
+    color: #4CAF50;
+
+}
+.reps:hover{
+    color: #2196F3;
+}
+
+.progs:hover{
+    color: #f44336;
+}
+h3{
+  text-align: center;
+  color: #4CAF50;
+  margin-left: -10vh;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2vw;
+}
+span:hover{
+  -webkit-transition: transform 0.2s ease-in-out;
+  -webkit-transform: scale(1.1);
+          -ms-transform: scale(1.1);
+          transform: scale(1.1);
+}
+span{
+  -webkit-transition: transform 0.2s ease-in-out;
+}
+.reportsHead{
+  text-align: center;
+   color:#2196F3;
+   font-family: 'Montserrat', sans-serif;
+   font-size: 3vw;
+   margin-left: 90px;
+   margin-right: 90px;
+}
+.reports{
+  text-align: center;
+   color:white;
+   font-family: 'Montserrat', sans-serif;
+   font-size: 2vw;
+}
+
+.programsHead{
+  text-align: center;
+   color:#f44336;
+   font-family: 'Montserrat', sans-serif;
+   font-size: 3vw;
+   margin-left: 90px;
+   margin-right: 90px;
+}
+.programs{
+  text-align: center;
+   color:white;
+   font-family: 'Montserrat', sans-serif;
+   font-size: 2vw;
+}
+.aboutHeader{
+  text-align: center;
+   color:white;
+   font-family: 'Montserrat', sans-serif;
+   font-size: 3vw;
+   margin-left: 90px;
+   margin-right: 90px;
+}
+.about{
+  text-align: left;
+   color:white;
+   font-family: 'Montserrat', sans-serif;
+   font-size: 2vw;
+}

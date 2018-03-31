@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+  <title>Hammie217 Arduino</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+    
+<body style="background-image: url(DSC_0186__1518271350_143.159.229.212.jpg);background-size: cover">
+
+<div class="container-fluid" style="width: 80%;background-color: lightgray;text-align: center;">
+    <div style="height: 300px;margin:0 auto;width=100%">
+  <h1 style="background-image: url(2.jpg);height: 300px;color: white;vertical-align: middle;width: 100%;text-align: center;width: 100%;padding-top: 125px;font-size: 50Px;background-repeat: no-repeat;background-position: center;margin-top: 0" >Arduino Basics </h1>
+        </div>
+    <nav class="navbar navbar-default navbar-static-top" style="border: 0px">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Hammie217</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a class="active" class="dropdown-toggle" data-toggle="dropdown" href="#">Programming
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="HTMLGuide.html">HTML</a></li>
+          <li><a href="Programs.html">Programs</a></li>
+          <li><a href="Arduino.html">Arduino</a></li>
+        </ul>
+      </li>
+      <li ><a href="About%20Me.html">About Me/CV</a></li>
+      <li ><a href="Updates.html">Updates</a></li>
+        <li><a href="Bindex.html">OLD</a></li>
+    
+    </ul>
+</nav>
+    <div class="row">
+    <div class="col-sm-4"><h1>Breadboard</h1><img src="breadboard.png" style="width: 50%"><br />Using breadboards makes prototyping circuits infinitely easier but adds parasitic(unwanted) effects when dealing with frequency dependent circuit (circuit that turn on and off quickly)</div>
+    <div class="col-sm-4"><h1>Basic components</h1><img src="Basic%20components.jpg" style="width: 100%">These are some of the most common componets you will come across, you should start getting used to them. If there is a component you don't know how to use just ask rather than popping them.</div>
+    <div class="col-sm-4"><h1>Resistor chart</h1><img src="resistor-color-chart.jpg" style="width: 100%">This is what all the funny colours on your resistors mean, read this by holding the brown/gold/silver band to the right and read off the values with the first ones meaning the actual numbers and then the last (excluding the gold/silver/brown) is your multiplier aka 2 would mean *100. The last band is the tolerance which is generally gold (+/-10% of the merked value) unless the resistance value is key</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6"><h1>Arduino cheat sheet</h1><h3><a href="CheatSheetExamples.docx">Cheat sheet code examples(use this for syntax)</a></h3><style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">Command</th>
+    <th class="tg-yw4l">Used where</th>
+    <th class="tg-yw4l">Function</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">pinMode(pin,IN/OUT)</td>
+    <td class="tg-yw4l">setup</td>
+    <td class="tg-yw4l">This defines which pins will be used and whether they ar inputs or outputs(TURNS OUT YOU ONLY NEED THIS FOR DIGITAL PINS) </td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">digitalRead(pin)</td>
+    <td class="tg-yw4l">loop</td>
+    <td class="tg-yw4l">This will return a 1 or 0 depending on if the pin is high or low</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">digitalWrite(pin,HIGH/LOW)</td>
+    <td class="tg-yw4l">loop</td>
+    <td class="tg-yw4l">Will turn an output pin high or low depening on what you choose</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">delay(T)</td>
+    <td class="tg-yw4l">loop</td>
+    <td class="tg-yw4l">Creates a software delay(not accurate) of length T mili-seconds</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">If(1==1){code here}</td>
+    <td class="tg-yw4l">Both</td>
+    <td class="tg-yw4l">An if statement will run lines of code within the curly braces below it if the question in the circular brackets is true(check the bottom of the page for more info)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">else{code here }</td>
+    <td class="tg-yw4l">Both</td>
+    <td class="tg-yw4l">If an if statement fails then it can run another section of code this is donated by else and curly braces</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">for(int a=0;a&lt;=10;a++){code here}</td>
+    <td class="tg-yw4l">Both</td>
+    <td class="tg-yw4l">A for loop runs a section of code as many times as you tell it to in this case it will run for values a=0 to a=9</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Serial.print(showThisValue)</td>
+    <td class="tg-yw4l">loop</td>
+    <td class="tg-yw4l">When you want your arduino to interface with the computer you can send it information using this and read it in the serial monitor</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Serial.begin(9600)</td>
+    <td class="tg-yw4l">setup</td>
+    <td class="tg-yw4l">This sets the Bode rate with the computer (communication frequency) and you can get gibberish back if you don't specify to the computer</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">analogRead(pin)</td>
+    <td class="tg-yw4l">loop</td>
+    <td class="tg-yw4l">Now this is for the analog pins compared to digital and will send back a value anywhere between 0 and 1023 (0 being low and 1023 being high)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">analogWrite(pin,value)</td>
+    <td class="tg-yw4l">loop</td>
+    <td class="tg-yw4l">This now outputs a voltage from your set pin ranging from 0 to 255. Analogue write are actually PWM meaning actually just fast switching digital and therefore are from digital pins (ones that have PWM are denoted with a ~)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">While(1==1){code here}</td>
+    <td class="tg-yw4l">both</td>
+    <td class="tg-yw4l">This will run a loop that will run until the case at the top is broken or it encounters break;</td>
+  </tr>
+</table>
+        <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">IF statement query</th>
+    <th class="tg-yw4l">Used where</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">==</td>
+    <td class="tg-yw4l">Does something equal something else?</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">(a==b)&amp;&amp;(c==d)</td>
+    <td class="tg-yw4l">Are 2 separate queries both true?</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">(a==b)||(c==d)</td>
+    <td class="tg-yw4l">Is at least one of two queries true?</td>
+  </tr>
+</table></div>
+        <div class="col-sm-6"><h1>Arduino Project tutorials </h1><h3><a href="Getting%20started.docx">0-Setting up your device</a></h3><h3><a href="FlashingLed.docx">1-Flashing LED project</a></h3><h3><a href="Basic%20oscilloscope.docx">2-Serial plotter example</a></h3><h3><a href="Rgb%20LED.docx">3-RGB LED</a></h3></div>
+    </div>
+    
+
+
+   
+    
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,34 @@
+table {
+  height: 40%;
+  left: 10%;
+  overflow-y: scroll;
+  position: static;
+  width: 100%;
+  font-family: verdana;
+    margin-right: 0px;
+    margin-left: auto;
+}
+
+
+thead th {
+  background: #00396B;
+  color: #FFF;
+  font-size: 25px;
+  font-weight: 100;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+tr {
+  background: #f4f7f8;
+  border-bottom: 1px solid #FFF;
+  margin-bottom: 5px;
+}
+
+th, td {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  padding: 20px;
+  text-align: left;
+  font-size: 18px;
+}

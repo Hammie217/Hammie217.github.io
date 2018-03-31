@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <title>Learn HTML</title>
+</head>
+    <div style="background-image:url('12.jpg');x`padding:5px;height:300px;background-repeat:no-repeat;background-position: center"id="cent">
+    <body class="one">
+        <h1 class="title"><br>HTML for beginners</h1>
+        </div>
+        <div class="collumn">
+        <h1>Links</h1>
+        <h2 class="links"><a href="Bindex.html" style="text-decoration: none;color: #D1D5DE;">Welcome!</a><br /><br /><a href="CV.html" style="text-decoration: none;color: #D1D5DE;">My CV</a></h2>
+        </div>
+        <div id="texter">
+        <h2>Introduction to HTML</h2>
+        <p>HTML (Hypertext Mark-up Language) is a programming language unlike your usual C or Java as this is designed purely for websites and graphical programming compared to Java which is used more for logic programming (aka doing automatic maths). This means you don’t have to set up a graphical window as that is already done for you, all you must do is program what goes on this page.<br /><br />For every action there is an equal and opposite reaction, the third of Newtons laws is everywhere in physics and the same in programming, for every tag opened it must also be closed at the end, this  is done by simply adding a forward slash in the opening tag like this:<br />Opening tag &lt;body&gt;<br />Closing tag &lt;/body&gt;</p>
+        <h2>Parent, Child relationship</h2>
+        <p>In HTML your code is always tags within tags which gives you the relationship of what sections of the website go where, when a tag is within another aka how a &lt;p&gt; may be within &lt;body&gt; the p is said to be the child of the body class and therefore the body is the parent. It’s always useful to understand the language used by programmers otherwise when you look up new things to learn the language will confuse you and will make your job as a programmer massively harder</p>
+        <h2>Responsive Web Design</h2>
+        <p>In HTML, it is always advised to use what is called responsive web design, this means that when different machines load up the same website it should be just as easy to use. This is done by making sections of the webpage percentage based meaning so that for any monitor an image or section will always be 50% and not a set number of pixels. Some older websites haven’t used responsive web design due to when they were made there wasn’t really any need to but now if you loaded one of these websites up on a modern-day computer everything would be odd sizes and likely mixed up. So, make a note! Responsive web design = Good practice.</p>
+        <h2>HTML Standards</h2>
+        <p>HTML has standards that are followed so that code is readable all around the world, it is a very good idea to familiarise yourself with these W3C standards at https://www.w3.org/ . This website is also rather good as they have an automatic validation service where you can upload your HTML and see if it does pass these regulations.</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">HTML</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Header</td>
+                    <td>&lt;h1&gt;||&lt;h2&gt;…</td>
+                    <td>This is used for text for headings where the number sets the size of font</td>
+                </tr>
+                <tr>
+                    <td>Language set</td>
+                    <td>&lt;!DOCTYPE html&gt;</td>
+                    <td>This is always the first line of code as this tells the browser what language to read the document in</td>
+                </tr>
+                <tr>
+                    <td>HTML tag</td>
+                    <td>&lt;HTML&gt;</td>
+                    <td>Anything that is within this area is read as HTML  and almost everything should be inside of this</td>
+                </tr>
+                <tr>
+                    <td>Paragraph</td>
+                    <td>&lt;p&gt;</td>
+                    <td>This is the tag used for blocks of text on a webpage</td>
+                </tr>
+                <tr>
+                    <td>Head</td>
+                    <td>&lt;head&gt;</td>
+                    <td>The head sets the metadata for the page (Data not on the page) and must be inside the html tag</td>
+                </tr>
+                <tr>
+                    <td>Title</td>
+                    <td>&lt;title&gt;</td>
+                    <td>This sets the name of the webpage which is shown as the tab title not actually on the page. This must be in the head tag</td>
+                </tr>
+                <tr>
+                    <td>Body</td>
+                    <td>&lt;body&gt;</td>
+                    <td>Any code inside the body tag will be displayed on the webpage itself and therefor almost everything should be in here. The body tag must be inside the HTML tag</td>
+                </tr>
+                <tr>
+                    <td>Break</td>
+                    <td>&lt;br&gt;</td>
+                    <td>This will break any text block onto another line, remember this must be opened and closed (best to use a self-closing tag)</td>
+                </tr>
+                <tr>
+                    <td>Self-closing tag</td>
+                    <td>&lt;br /&gt;</td>
+                    <td>This can be used for almost any tag with varying usefulness, it simply opens and closes instantly meaning it’s good for things like breaks to half the size of code needed.</td>
+                </tr>
+                <tr>
+                    <td>Comment</td>
+                    <td>&lt;S!--Text --&gt;</td>
+                    <td>Comments are lines of code that don’t serve a machine purpose but are instead to make the code more easily understood</td>
+                </tr>
+                <tr>
+                    <td>Divide</td>
+                    <td>&lt;div&gt;</td>
+                    <td>This is primarily used to divide sections of HTML into groups such as a title and block of text would be grouped together. This tag does not effect anything at all unless it has a class/id</td>
+                </tr>
+                <tr>
+                    <td>Span</td>
+                    <td>&lt;span&gt;</td>
+                    <td>This is the exact same as a div as It does nothing except group sections of code together, this is generally used for small sections of code.</td>
+                </tr>
+                <tr>
+                    <td>Text stylings</td>
+                    <td>&lt;em&gt;<br />&lt;strong&gt;</td>
+                    <td>These tags when applied in a block of text make the text within italic and or bold depending on which are used</td>
+                </tr>
+                <tr>
+                    <td>Unordered List</td>
+                    <td>&lt;ul&gt;<br />&lt;li&gt; </td>
+                    <td>To create bullet points the list is initiated with &lt;ul&gt; and for each item inside opened and closed with &lt;li&gt;  </td>
+                </tr>
+                <tr>
+                    <td>Ordered list</td>
+                    <td>&lt;ol&gt;<br />&lt;li&gt; </td>
+                    <td>To created a numbered list the &lt;ol&gt; tag is used and once again &lt;li&gt; for each list item inside</td>
+                </tr>
+                <tr>
+                    <td>Images</td>
+                    <td>&lt;img src=”location” alt=”description”/&gt;</td>
+                    <td>This image tag is another use of a self-closing tag seen by the slash at the end, this line of code will load an image given by the src attribute which can be a file link or website link. The alt attribute gives the image a description when hovered over and is useful for the visually impaired to hear an image description</td>
+                </tr>
+                <tr>
+                    <td>Videos</td>
+                    <td>&lt;video src=”location” alt=”description”/&gt;</td>
+                    <td>This works exactly as the image command works except you can see this time the img is replaced with video to specify how it is used</td>
+                </tr>
+                <tr>
+                    <td>Anchor elements</td>
+                    <td>&lt;a href=”link”&gt;</td>
+                    <td>An anchor element is used to add a hyperlink to a piece of text diverting to another page or a download, this is specified by the href(hyperlink reference) attribute. You can make this open in a new tab by adding “target=”_blank”” in the anchor element tag. These links can even be used for the same page by linking href to an id of an item on the page like so: href=”#top” if a id of top is used like &lt;div id=””top&gt;  </td>
+                </tr>
+                <tr>
+                    <td>Navigation</td>
+                    <td>&lt;nav&gt;</td>
+                    <td>This is the defined area for a navigation bar code to be made (called a semantic tag as it describes what is inside unlike &lt;div&gt; etc)</td>
+                </tr>
+                <tr>
+                    <td>Table</td>
+                    <td>&lt;table&gt;<br />&lt;thead&gt; <br />&lt;tbody&gt; <br />&lt;tr&gt; <br />&lt;td colspan=”number”&gt; <br />&lt;th scope=”col”/”row”&gt; &lt;tfoot&gt; </td>
+                    <td>To initiate a table &lt;table&gt; is used for each row &lt;tr&gt; and then for each data item &lt;td&gt; with the text inside, if an item should spread multiple collumns you can set the column span for each data entry by changing the colspan entry(this doesn’t need to be set to 1) this can also be done as rowspan to have common rows. With this you have a basic table. You could enter titles as data but it is more accepted to use &lt;th&gt; standing for table headings, you can choose the scope to be column or row setting which it is a heading for.<br />You should generally define your data in the table in a &lt;tbody&gt;  and the heading in a &lt;thead&gt; and footer in &lt;tfoot&gt;<br />Borders are very common in tables and it is more accepted generally to use css which is done by:<br />table, td{<br />border : 1px solid black;<br />}<br />Which creates a 1pixel black border for the table and each entry.</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

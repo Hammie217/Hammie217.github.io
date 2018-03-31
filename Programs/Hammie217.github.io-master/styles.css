@@ -1,0 +1,121 @@
+    #left,#center,#right{
+    width: 25%;
+    height: auto;
+    float: right;
+    text-align: center;
+    
+}
+.one{
+    font-family: verdana;
+    color: #433633;
+    background-color: #D1D5DE;
+    width: 100%;
+    position: absolute;
+    top: 0; bottom:0; left: 0; right:0;
+    margin: auto;
+    overflow-x: hidden;
+    
+
+}
+a{
+    text-decoration: none;
+}
+
+#cent{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#image{
+    float: right;
+}
+.title{
+    font-size:100px ;
+    font-family: verdana;
+    color: #D1D5DE;
+    text-align: center;
+    margin: 0px;
+}
+.half{
+    width: 75%;
+    float: right;
+}   
+.collumn{
+    width: calc(25% - 10px);
+    color: #D1D5DE;
+    background-color:#00396B;
+    height: 500px;
+    margin: 0px;
+    float: left;
+   
+}
+h1{
+    text-align: center;
+}
+.links{
+    text-align: center;
+    
+}
+.two{
+    font-family: verdana;
+    margin: 0px;
+    width: 100%;
+    height: 300px;
+    margin:0 auto;
+    overflow-x: hidden;
+}
+.header{
+    height: 300px;
+    width: 100%;
+    top: 0;
+    position: absolute;
+}
+.rig{
+    float: right;
+}
+.text{
+    padding: 0px 10px 0px 10px;
+    display: flex;
+}
+table {
+  height: 40%;
+  left: 10%;
+  margin: 20px auto;
+  overflow-y: scroll;
+  position: static;
+  width: 75%;
+  font-family: verdana;
+    margin-right: 0px;
+    margin-left: auto;
+}
+
+#texter{
+    float: right;
+    width: 75%;
+    font-family: verdana;
+    margin-right: 0px;
+    margin-left: auto;
+}
+
+thead th {
+  background: #00396B;
+  color: #FFF;
+  font-size: 25px;
+  font-weight: 100;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+tr {
+  background: #f4f7f8;
+  border-bottom: 1px solid #FFF;
+  margin-bottom: 5px;
+}
+
+th, td {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  padding: 20px;
+  text-align: left;
+  font-size: 18px;
+}

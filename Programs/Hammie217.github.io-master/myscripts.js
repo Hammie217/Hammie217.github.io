@@ -1,0 +1,10 @@
+$(document).ready(function(){
+        $(".carousel").toggle();
+    $(".alert").click(function(){
+        $(".alert").slideUp("slow");
+    });
+     $(".testy").click(function(){
+        $(".minething").toggle();
+         $(".carousel").toggle();
+    });
+});
