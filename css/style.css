@@ -1,3 +1,99 @@
+@media only screen and (max-width: 1000px) {
+    .programsHead {
+        font-size: 30px!important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+    .programs{
+      font-size: 20px !important;
+    }
+    .reportsHead {
+        font-size: 30px!important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+    .reports{
+      font-size: 20px !important;
+    }
+    .container-fluid{
+      margin-left: 0px;
+    }
+    .progs{
+      width: 100px;
+      height: 100px;
+    }
+    .imer{
+      font-size:30px !important;
+      text-align: center !important;
+      justify-content: center !important;
+    }
+
+    #mySidenav a {
+      width: 120px !important;
+      border-radius: 5px 5px 5px 5px !important; /* Rounded corners on the top right and bottom right side */
+      margin-top: 20px !important;
+      /*left: calc(50% - 60px) !important;*/
+    }
+
+    #mySidenav a:hover {
+        right: 0% !important; /* On mouse-over, make the elements appear as they should */
+    }
+
+    /* The about link: 20px from the top with a green background */
+    #about {
+        left: calc(50% - 245px) !important;
+        top: 0px!important;
+        background-color: #4CAF50;
+
+    }
+
+    #blog {
+        left: calc(50% - 120px) !important;
+          top: 0px!important;
+        background-color: #2196F3; /* Blue */
+    }
+
+    #projects {
+          left: calc(50% + 5px) !important;
+            top: 0px!important;
+        background-color: #f44336; /* Red */
+    }
+
+    #contact {
+          left: calc(50% + 130px) !important;
+            top: 0px!important;
+        background-color: #555 /* Light Black */
+    }
+    .Middle2{
+          text-align: center;
+          margin-top: 120px !important;
+      }
+      .descrip{
+        font-size: 30px !important;
+      }
+
+}
+
+@media only screen and (max-width: 500px) {
+  #about {
+      left: calc(50% - 120px) !important;
+      top: 65px!important;
+      background-color: #4CAF50;
+
+  }
+  #contact {
+        left: calc(50% + 5px) !important;
+        top: 65px!important;
+      background-color: #555 /* Light Black */
+  }
+  .Middle2{
+        text-align: center;
+        margin-top: 190px !important;
+    }
+}
+.imer{
+  font-size:3vw;
+}
 html{
   overflow-x: hidden;
 }
