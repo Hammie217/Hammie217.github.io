@@ -1,0 +1,41 @@
+body {
+  margin: 0px;
+  font-family: 'Lato';
+  font-weight: 300;
+  font-size: 1.2em;
+}
+
+#anime-demo {
+  position: relative;
+}
+
+svg {
+   padding: 00px;
+}
+
+
+html{
+  background-color: #222222;
+}
+
+#anime-demo{
+  position: absolute;
+  left: calc(50% - 150px);
+  top: 30%;
+  text-align: center;
+  transform-origin: 50% 48% !important;
+}
+
+.rr1{
+  z-index: 10;
+}
+
+.rr1{
+  z-index: 9;
+}
+.rr1{
+  z-index: 8;
+}
+.rr1{
+  z-index: 7;
+}
