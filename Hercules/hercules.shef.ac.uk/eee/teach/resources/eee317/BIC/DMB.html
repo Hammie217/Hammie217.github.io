@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee317/BIC/DMB.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Sep 2017 07:02:14 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<TITLE>EEE317 Principles of Communications</TITLE>
+<link href="../../eeeteach.css" rel="stylesheet" type="text/css" /><!--[if IE]>
+<style type="text/css"> 
+/* place css fixes for all versions of IE in this conditional comment */
+.thrColHybHdr #sidebar1, .thrColHybHdr #sidebar2 { padding-top: 30px; }
+.thrColHybHdr #mainContent { zoom: 1; padding-top: 15px; }
+/* the above proprietary zoom property gives IE the hasLayout it needs to avoid several bugs */
+</style>
+<![endif]-->
+</head>
+
+<body class="thrColLiqHdr">
+
+<div id="container">
+  <div id="header">
+    <h1><img src="../../banner.gif" width="480" height="60" alt="eee banner" /></h1>
+  <!-- end #header --></div>
+  <div id="sidebar1">
+    <p><a href="http://www.shef.ac.uk/eee">EEE Home</a></p>
+    <p><a href="../../index-2.html">All Years</a></p>
+    <p><a href="../../first.html">First Year</a></p>
+    <p><a href="../../second.html">Second Year</a></p>
+    <p><a href="../../third.html" class="hilight">Third Year</a></p>
+    <p><a href="../../fourth.html">Fourth Year</a></p>
+    <p><a href="../../msc.html">MSc Courses</a><br />
+      <!-- end #sidebar1 -->
+    </p>
+</div>
+
+
+  <div id="mainContent">
+    <h1>EEE317 Principles of Communications</h1>
+    <table border="0" width="100%">
+  <tr>
+  <td class="tbluet">DMB</td>
+  </tr>
+  <tr>
+  <td class="tblue">- an overview of the DMB system, and in particular the T-DMB version for 
+mobile video broadcasts.</td>
+  </tr>
+
+<tr>
+<td>
+
+<p>Digital Multimedia broadcasting (DMB) is based on the Eureka 147 Digital Audio 
+Broadcast (DAB) system which is widely deployed in the UK and many other 
+countries around the world.  One of the advantages of using DMB is that it could 
+be rolled out and used without much modification, simply increasing the level of 
+error correction to cope with the mobile environment.</p>
+
+<p>Eureka 147 allows for broadcasts from both terrestrial transmitters and satellite 
+based transmitters.  For DMB both platforms are also possible, but in view of the 
+differing transmission requirements between the two systems, some modifications 
+would be needed.  For terrestrial based transmissions a flavour of the system 
+designated as T-DMB (Terrestrial Digital Multimedia Broadcasting) is used, whereas 
+for satellite broadcasting S-DMB (Satellite Digital Multimedia Broadcasting) is 
+used.</p>
+    <p>&nbsp;</p>
+    </td>
+    </tr>
+    <tr>
+    <td class="tblue">RF signal characteristics</td>
+    </tr>
+    <tr>
+    <td><p>Like many other broadcasting systems, DMB and DAB use a form of transmission 
+known as Orthogonal Frequency Division Multiplex (OFDM). This has been adopted 
+because of its high data capacity and suitability for applications such as 
+broadcasting. It also offers a high resilience to interference, can tolerate 
+multi-path effects and is able to offer the possibility of a single frequency 
+network, SFN.</p>
+
+<p>Orthogonal Frequency Division Multiplex (OFDM) is a form of modulation which 
+uses a large number of closely spaced carriers that are modulated with low rate 
+data.  These signals would normally be expected to interfere with each other, but 
+by making the signals orthogonal by choosing the carrier spacing carefully, 
+interference can be avoided.  For this to occur, the carrier spacing must be 
+equal to the reciprocal of the symbol period.  When a particular signal is demodulated, 
+the adjacent carriers will contain a whole number of cycles in each symbol period 
+and their contribution will sum to zero.</p>
+
+<p>&nbsp; </p>
+<p align="center">
+<img src="ofdm.gif" alt="OFDM Spectrum" height="112" width="300"></p>
+<p align="center"><i>OFDM Spectrum</i></p>
+
+
+<p>The data to be transmitted is split across all the carriers and this means that 
+by using error correction techniques, if some of the carriers are lost due to 
+multi-path effects, then the data can be reconstructed.  Additionally having data 
+carried at a low rate across all the carriers means that the effects of 
+reflections and inter-symbol interference can be overcome.  It also means that 
+single frequency networks, where all transmitters can transmit on the same 
+channel can be implemented. For more information on OFDM refer to 
+<a href="http://www.radio-electronics.com/info/cellulartelecomms/ofdm/ofdm.php">Radio-Electronics.Com</a></p>
+    <p>&nbsp;</p>
+    </td>
+    </tr>
+    <tr>
+    <td class="tblue">DMB format</td>
+    </tr>
+    <tr>
+    <td><p>The transmissions for the form of DAB being deployed in many countries occupy 
+approximately 1.5 MHz bandwidth and for the VHF broadcasts the transmission 
+contains 1536 Carriers. However it is possible to use a variety of modes:</p>
+
+<table style="border-collapse: collapse;" border="0" bordercolor="#111111" cellpadding="0" cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+    <td width="18%" class="tblue">* 2K mode</td>
+    <td width="82%">1536 carriers</td>
+  </tr>
+  <tr>
+    <td width="18%" class="tblue">* 1K mode</td>
+    <td width="82%">768 carriers</td>
+  </tr>
+  <tr>
+    <td width="18%" class="tblue">* 0.5K mode</td>
+    <td width="82%">384 carriers</td>
+  </tr>
+  <tr>
+    <td width="18%" class="tblue">* 0.25K mode</td>
+    <td width="82%">192 carriers</td>
+  </tr>
+</tbody></table>
+    <p>&nbsp;</p>
+    </td>
+    </tr>
+    <tr>
+    <td class="tblue">Frequency allocations</td>
+    </tr>
+    <tr>
+    <td><p>It would be possible to utilise the DAB transmission system within the UK, 
+however much of the capacity has already been taken up, although some reserve capacity 
+has been retained for future data transmissions of which DMB could be part.</p>
+
+<p>A more likely solution is to use frequencies within the L-Band DAB allocation 
+(1452 - 1467.5 MHz), which in some countries would require little legislation.</p>
+
+<p>By using a new band it will not only be possible to use smaller antennas, an 
+important element for mobile phones and PDAs, but it will also be possible to 
+tailor the transmission to accommodate the Doppler shifts likely to be 
+encountered by small mobile devices.  This can be achieved by reducing the number 
+of carriers.  Despite the carrier number reduction, the maximum data rate of 
+1.152 Mbps is still retained.  The drawback of using the L band frequencies is 
+that they would require a much higher density of transmitters to provide the 
+required coverage.</p>
+   <p>&nbsp;</p>
+    </td>
+    </tr>
+    <tr>
+    <td class="tblue">Battery consumption</td>
+    </tr>
+    <tr>
+    <td><p>One of the major requirements for any mobile video system is that it shall not 
+place a major load on the battery of the handheld device.  With user expectations 
+requiring that battery life shall be several days between recharges, this is a 
+major consideration.  While battery technology is improving, and IC technology 
+has enabled power consumption of chips to be reduced, basic technology can 
+also play its part.</p>
+
+<p>DAB inherently includes a technique known as time slicing by using a Time 
+Division Multiplexing delivery method.  In this way the receiver is only switched 
+on when it is required, thereby saving battery power.  This makes DMB (which is 
+based on DAB) particular suited to the delivery of material to handheld devices.</p>
+
+</td></tr></table>
+
+<!-- end #mainContent --></div>
+	<!-- This clearing element should immediately follow the #mainContent div in order to force the #container div to contain all child floats --><br class="clearfloat" />
+   <div id="footer">
+    <div id="footer2">
+      <div id="footerLeft">© 2014 The University of Sheffield </div>
+    </div>
+    <p>&nbsp;</p>
+  <!-- end #footer --></div>
+<!-- end #container --></div>
+</body>
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee317/BIC/DMB.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Sep 2017 07:02:15 GMT -->
+</html>

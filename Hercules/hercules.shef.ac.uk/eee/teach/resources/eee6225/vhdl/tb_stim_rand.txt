@@ -1,0 +1,121 @@
+-- This example starts with the add-with-carry module from the coding examples
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+
+-- Must add the following library for conversion functions
+use ieee.std_logic_arith.ALL;
+
+ENTITY addwithcarry_tb_rand_vhd_tb IS
+END addwithcarry_tb_rand_vhd_tb;
+
+ARCHITECTURE behavior OF addwithcarry_tb_rand_vhd_tb IS 
+
+	constant DELAY : time := 20 ns;
+	
+	-- Define length of adder in bits
+	constant NB : integer := 8;
+
+	-- Define number of random test vectors to apply
+	constant NUM_TESTS : integer := 1000;
+
+	COMPONENT addwithcarry	
+	GENERIC ( N : integer := NB );
+	PORT(
+		A,B : IN std_logic_vector(NB-1 downto 0);		
+		CarryIn : IN std_logic;          
+		Sum : OUT std_logic_vector(NB-1 downto 0);
+		CarryOut : OUT std_logic
+		);
+	END COMPONENT;
+
+	SIGNAL A,B :  std_logic_vector(NB-1 downto 0);	
+	SIGNAL CarryIn :  std_logic;
+	SIGNAL Sum :  std_logic_vector(NB-1 downto 0);
+	SIGNAL CarryOut :  std_logic;
+
+	-- new signal to hold current random number
+	signal rv : std_logic_vector(2*NB downto 0);
+
+	-- definition of a procedure to generate random numbers
+
+   procedure RANDOM (variable Seed: inout integer; variable Y: out bit) is
+     ----------------------------------------------------------------------
+     -- Random Number generator from:
+     -- The Art of Computer Systems Performance Analysis, R.Jain 1991 (p443)
+     --   x(n) := 7^5x(n-1) mod (2^31 - 1)
+     --   This has period 2^31 - 2, and it works with odd or even seeds
+     --   This code does not overflow for 32 bit integers.
+     ----------------------------------------------------------------------
+     constant a : integer := 16807;     -- multiplier 7**5
+     constant m : integer := 2147483647;-- modulus    2**31 - 1
+     constant q : integer := 127773;    -- m DIV a
+     constant r : integer := 2836;      -- m MOD a
+     constant m_real : real := real(M);
+     
+     variable seed_div_q  : integer;
+     variable seed_mod_q  : integer;
+     variable new_seed : integer;
+	  variable X : real;
+     
+  begin
+     seed_div_q := seed / q;         -- truncating integer division
+     seed_mod_q := seed MOD q;       -- modulus
+     new_seed := a * seed_mod_q - r * seed_div_q;
+     if (new_seed > 0) then
+        seed := new_seed;
+     else
+        seed := new_seed + m;
+     end if;
+     X := real(seed) / m_real;
+	  if (X>0.5) then
+	      Y := '1';
+     else
+	      Y := '0';
+	  end if;	  
+  end RANDOM;
+
+
+
+
+BEGIN
+
+	uut: addwithcarry	 PORT MAP(
+		A => A,
+		B => B,
+		CarryIn => CarryIn,
+		Sum => Sum,
+		CarryOut => CarryOut
+	);
+
+
+-- *** Test Bench - User Defined Section ***
+   tb : PROCESS
+		variable seed : integer := 12345678;
+		variable outb : bit;
+   BEGIN
+
+		for i in 1 to NUM_TESTS loop
+
+			-- generate a long vector of random bits
+			for j in rv'range loop
+				RANDOM(seed,outb);
+				rv(j) <=  TO_StdULogic(outb);
+			end loop;
+
+			-- apply the random bits to the UUT inputs
+			A <= rv(NB-1 downto 0);
+			B <= rv(2*NB-1 downto NB);
+			CarryIn <= rv(2*NB);
+			wait for DELAY;
+
+			-- EXERCISE: add checking the results are correct here???
+				
+		end loop;
+
+      wait; -- will wait forever
+   END PROCESS;
+-- *** End Test Bench - User Defined Section ***
+
+END;

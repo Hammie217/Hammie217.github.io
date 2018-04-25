@@ -1,0 +1,145 @@
+-- A more complicated VHDL Test Bench example (this is not for the AES!!!)
+-- a clock disable mechanism is added to the test bench to allow
+-- the "run -all" simulator command to work correctly.
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_arith.ALL;
+USE ieee.numeric_std.ALL;
+
+ENTITY more_complex_tb IS
+END more_complex_tb;
+
+ARCHITECTURE behavior OF more_complex_tb IS 
+
+	constant PERIOD : time := 10 ns;
+	constant DELAY  : time := PERIOD/10;
+
+	constant Ntests : integer := 25;
+
+	subtype word is std_logic_vector(31 downto 0);
+
+	type inputwords is array(1 to 8) of word;
+	constant TV_INPUT : inputwords :=
+			(X"00000000",X"00000000",X"00000000",X"00000000",X"00000000",X"00000000",X"000001B7",X"FE83C0A7");
+	
+	type resultwords is array(0 to 4*Ntests-1) of word;
+	constant TV_OUTPUT : resultwords :=
+		  (X"20D790C9",X"FDCEE217",X"39D1A3CB",X"4194A3D8",
+			X"F30FDEB8",X"19F8F027",X"7E7FB7DA",X"1FA3DD5E",
+			X"A2B3CA0D",X"A608DD34",X"52CD2160",X"340303F7",
+			X"BF9BA0E6",X"803C80C0",X"E25EC89A",X"48FCD365",
+			X"2F2A344A",X"5491A3CB",X"8599FCD7",X"63CBC7CF",
+			X"53EB6215",X"0CC10ABE",X"5175D12B",X"40A3F35B",
+			X"CA097A86",X"270A12C9",X"B723B943",X"BF629F6E",
+			X"1AB77A3C",X"6CD79B92",X"95EDBD6B",X"E9A2EBF1",
+			X"5000B524",X"542716FC",X"87F68FA7",X"693CA3BA",
+			X"6C401BBA",X"085938BD",X"33514EE0",X"12A397EB",
+			X"A9A00A61",X"03FE670B",X"51FD7443",X"A9128E17",
+			X"9D7F9723",X"F32970CE",X"771C7A52",X"1FD02F44",
+			X"3B61C167",X"29813189",X"74B6D759",X"1F90F485",
+			X"155EEC5F",X"640DD29A",X"F0C2AABB",X"B0ABD813",
+			X"8AB8640F",X"B56486E4",X"6E2C728F",X"20693008",
+			X"86D6E868",X"4974836B",X"A2D1FA43",X"036B4C85",
+			X"EA42E3EE",X"50A8DF87",X"D80208F3",X"96DFD4D2",
+			X"A94CB148",X"E4BC01C9",X"B2AEAFA5",X"4AA6B43E",
+			X"571A98E2",X"7FFC2FE4",X"0C73401D",X"637C3A41",
+			X"986CE272",X"4DECAD5D",X"936CB09A",X"E985D246",
+			X"6D887658",X"9B1281C3",X"4108543A",X"E03728C2",
+			X"98CE8777",X"A707256B",X"DA7EA850",X"F49ED6C1",
+			X"7977404A",X"15179AC8",X"FEF930D8",X"CA8670E1",
+			X"B851CC7F",X"5F9C535A",X"E10F4325",X"676E2CC3",
+			X"22EB4633",X"7AF96010",X"0C08916B",X"6501C63B");
+	
+	COMPONENT some_design_unit
+	PORT(
+		clk        : IN std_logic;
+		en         : IN std_logic;
+		loadmode   : IN std_logic;
+		wordselect : IN std_logic_vector(1 downto 0);
+		DataIn     : IN word;		
+		DataOut    : OUT word
+		);
+	END COMPONENT;
+
+	SIGNAL clk :  std_logic;
+	SIGNAL en  :  std_logic := '0';
+	SIGNAL loadmode  :  std_logic;
+	SIGNAL wordselect  :  std_logic_vector(1 downto 0);
+	SIGNAL DataIn,DataOut,cmp : word;	
+	signal clk_disable : std_logic := '0';
+
+BEGIN
+
+	uut: some_design_unit PORT MAP(
+		clk => clk,
+		en => en,
+		loadmode => loadmode,
+		DataIn => DataIn,		
+		wordselect => wordselect,
+		DataOut => DataOut
+	);	
+
+-- *** Test Bench - User Defined Section ***
+	clkgen: process begin
+		if clk_disable='1' then
+			wait;
+		else
+			clk<='0';
+			wait for PERIOD/2;
+			clk<='1';
+			wait for PERIOD/2;
+		end if;
+	end process;
+
+
+   tb : PROCESS
+   BEGIN
+
+		wait until rising_edge(clk);
+		report "===== STARTING TEST VECTORS =====" severity note;
+				
+		-- load the input data
+		for i in TV_INPUT'range loop
+			en <= '1';
+			loadmode <= '1';
+			DataIn <= TV_INPUT(i);
+			wait until rising_edge(clk);
+		end loop;
+
+		-- wait for a while (no real reason...)
+		DataIn <= (others=>'U');
+		en <= '0';
+		wait until rising_edge(clk);
+		wait until rising_edge(clk);
+		wait until rising_edge(clk);
+		
+		-- cycle in running mode
+		for i in 0 to Ntests-1 loop
+		   
+			-- each execution requires eight cycles
+			for run in 0 to 7 loop
+				en <= '1';
+				loadmode <= '0';				
+				wait until rising_edge(clk);
+			end loop;			
+
+			-- read output for each of the four words and compare
+			for ws in 0 to 3 loop
+				en <= '0';
+			   cmp <= TV_OUTPUT(4*i+ws);
+				wordselect <= CONV_STD_LOGIC_VECTOR(ws,2);
+				wait for DELAY;			
+				assert (DataOut=cmp) report "*** TEST VECTOR MISMATCH ***" severity error;
+			end loop;
+			wordselect <= (others=>'U');
+
+		end loop;
+
+		report "===== TEST VECTORS COMPLETED =====" severity note;
+		clk_disable<='1';
+      wait; -- will wait forever
+   END PROCESS;
+-- *** End Test Bench - User Defined Section ***
+
+END;
