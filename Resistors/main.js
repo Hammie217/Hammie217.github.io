@@ -11,10 +11,15 @@ function myFunction(val) {
   else{
     mag= Math.floor(Math.log10(x))-1;
   }
-  if(x.charAt(0)=='.'){
+  if((x.charAt(0)=='.')){
     var fi = Math.round(x.charAt(1));
     var se = Math.round(x.charAt(2));
     var th = Math.round(x.charAt(3));
+  }
+  else if((x.charAt(1)=='.')&&(x.charAt(0)=='0')){
+    var fi = Math.round(x.charAt(2));
+    var se = Math.round(x.charAt(3));
+    var th = Math.round(x.charAt(4));
   }
   else if(x.charAt(1)=='.'){
     var fi = Math.round(x.charAt(0));
@@ -235,29 +240,139 @@ function myFunction(val) {
       break;
   }
 }
-var previous = null;
+var previous = 'x';
 function clickFunc(val){
-  if((previous!=null)||previous==val){
+  if((previous!='x')||previous==val){
 document.getElementById(previous).style.width="100px";
   }
 document.getElementById(val).style.width="120px";
 previous=val;
+UpdateRead();
 }
 
-var previous2 = null;
+var previous2 = 'x';
 function clickFunc2(val){
-  if((previous2!=null)||previous2==val){
+  if((previous2!='x')||previous2==val){
 document.getElementById(previous2).style.width="100px";
   }
 document.getElementById(val).style.width="120px";
 previous2=val;
+UpdateRead();
 }
 
-var previous3 = null;
+var previous3 = 'x';
 function clickFunc3(val){
-  if((previous3!=null)||previous3==val){
+  if((previous3!='x')||previous3==val){
 document.getElementById(previous3).style.width="100px";
   }
 document.getElementById(val).style.width="120px";
 previous3=val;
+UpdateRead();
+}
+
+var previous4 = 'x';
+function clickFunc4(val){
+  if((previous4!='x')||previous4==val){
+document.getElementById(previous4).style.width="100px";
+  }
+document.getElementById(val).style.width="120px";
+previous4=val;
+UpdateRead();
+}
+
+function UpdateRead(){
+  switch(previous3.charAt(0)){
+    case 'a':
+    document.getElementById("ValueH").innerHTML=(getNum(previous));
+    document.getElementById("ValueH").innerHTML+=(getNum(previous2)+"&Omega;");
+    break;
+    case 'b':
+    document.getElementById("ValueH").innerHTML=(getNum(previous));
+    document.getElementById("ValueH").innerHTML+=(getNum(previous2) +"0"+"&Omega;");
+    break;
+    case 'c':
+    document.getElementById("ValueH").innerHTML=(getNum(previous) +".");
+  document.getElementById("ValueH").innerHTML+=(getNum(previous2) +"k"+"&Omega;");
+    break;
+    case 'd':
+    document.getElementById("ValueH").innerHTML=(getNum(previous));
+  document.getElementById("ValueH").innerHTML+=(getNum(previous2)+"k"+"&Omega;");
+    break;
+    case 'e':
+    document.getElementById("ValueH").innerHTML=(getNum(previous));
+  document.getElementById("ValueH").innerHTML+=(getNum(previous2)+"0k"+"&Omega;");
+    break;
+    case 'f':
+    document.getElementById("ValueH").innerHTML=(getNum(previous)+".");
+  document.getElementById("ValueH").innerHTML+=(getNum(previous2)+"M"+"&Omega;");
+    break;
+    case 'g':
+    document.getElementById("ValueH").innerHTML=(getNum(previous));
+  document.getElementById("ValueH").innerHTML+=(getNum(previous2)+"M"+"&Omega;");
+    break;
+    case 'h':
+    document.getElementById("ValueH").innerHTML=(getNum(previous));
+  document.getElementById("ValueH").innerHTML+=(getNum(previous2)+"0M"+"&Omega;");
+    break;
+    case 'i':
+    document.getElementById("ValueH").innerHTML=(getNum(previous)+".");
+  document.getElementById("ValueH").innerHTML+=(getNum(previous2)+"G"+"&Omega;");
+    break;
+    case 'j':
+    document.getElementById("ValueH").innerHTML=(getNum(previous));
+  document.getElementById("ValueH").innerHTML+=(getNum(previous2)+"G"+"&Omega;");
+    break;
+    case 'k':
+    document.getElementById("ValueH").innerHTML=(getNum(previous)+".");
+  document.getElementById("ValueH").innerHTML+=(getNum(previous2)+"&Omega;");
+    break;
+    case 'l':
+    document.getElementById("ValueH").innerHTML=("0." +getNum(previous));
+  document.getElementById("ValueH").innerHTML+=(getNum(previous2)+"&Omega;");
+    break;
+    default:
+    document.getElementById("ValueH").innerHTML=(getNum(previous));
+  document.getElementById("ValueH").innerHTML+=(getNum(previous2)+"&Omega;");
+    break;
+  }
+}
+
+function getNum(val){
+  console.log(val.charAt(0))
+  switch(val.charAt(0)){
+    case 'a':
+    return 0;
+    break;
+    case 'b':
+    return 1;
+    break;
+    case 'c':
+    return 2;
+    break;
+    case 'd':
+    return 3;
+    break;
+    case 'e':
+    return 4;
+    break;
+    case 'f':
+    return 5;
+    break;
+    case 'g':
+    return 6;
+    break;
+    case 'h':
+    return 7;
+    break;
+    case 'i':
+    return 8;
+    break;
+    case 'j':
+    return 9;
+    break;
+    default:
+    return 0;
+    break;
+
+  }
 }
