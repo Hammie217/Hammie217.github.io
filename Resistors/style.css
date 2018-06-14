@@ -1,3 +1,14 @@
+@media screen and (max-width: 830px) {
+  .column {
+      width: 100% !important;
+  }
+}
+@media screen and (max-width: 430px) {
+  #tolerance {
+    position: absolute !important;
+    left: -9999px !important;
+  }
+}
 body {
   margin: 0px;
   font-family: 'Lato';
@@ -25,4 +36,16 @@ html{
   height: 20px;
   width: 50px;
   animation-duration: 0.5s;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
