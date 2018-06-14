@@ -36,6 +36,11 @@ function myFunction(val) {
   var se = Math.round(x.charAt(1));
   var th = Math.round(x.charAt(2));
   }
+  if(x.charAt(0)==''){
+    fi='x';
+    se='x';
+    th='x';
+  }
   switch(mag){
     case 0:
     document.getElementById("3").style.backgroundColor = "#000000";
@@ -58,20 +63,20 @@ function myFunction(val) {
       document.getElementById("14").style.backgroundColor = "#ff9900";
       break;
       case 5:
-      document.getElementById("3").style.backgroundColor = "#00ff00";
+      document.getElementById("3").style.backgroundColor = "#32CD32";
       document.getElementById("14").style.backgroundColor = "#ffff00";
       break;
       case 6:
       document.getElementById("3").style.backgroundColor = "#0000ff";
-      document.getElementById("14").style.backgroundColor = "#00ff00";
+      document.getElementById("14").style.backgroundColor = "#32CD32";
       break;
       case 7:
-      document.getElementById("3").style.backgroundColor = "#ff00ff";
+      document.getElementById("3").style.backgroundColor = "#9400D3";
       document.getElementById("14").style.backgroundColor = "#0000ff";
       break;
       case 8:
       document.getElementById("3").style.backgroundColor = "#cccccc";
-      document.getElementById("14").style.backgroundColor = "#ff00ff";
+      document.getElementById("14").style.backgroundColor = "#9400D3";
       break;
       case 9:
       document.getElementById("3").style.backgroundColor = "#ffffff";
@@ -112,16 +117,16 @@ function myFunction(val) {
       document.getElementById("11").style.backgroundColor = "#ffff00";
       break;
       case 5:
-      document.getElementById("1").style.backgroundColor = "#00ff00";
-      document.getElementById("11").style.backgroundColor = "#00ff00";
+      document.getElementById("1").style.backgroundColor = "#32CD32";
+      document.getElementById("11").style.backgroundColor = "#32CD32";
       break;
       case 6:
       document.getElementById("1").style.backgroundColor = "#0000ff";
       document.getElementById("11").style.backgroundColor = "#0000ff";
       break;
       case 7:
-      document.getElementById("1").style.backgroundColor = "#ff00ff";
-      document.getElementById("11").style.backgroundColor = "#ff00ff";
+      document.getElementById("1").style.backgroundColor = "#9400D3";
+      document.getElementById("11").style.backgroundColor = "#9400D3";
       break;
       case 8:
       document.getElementById("1").style.backgroundColor = "#cccccc";
@@ -166,16 +171,16 @@ function myFunction(val) {
       document.getElementById("12").style.backgroundColor = "#ffff00";
       break;
       case 5:
-      document.getElementById("2").style.backgroundColor = "#00ff00";
-      document.getElementById("12").style.backgroundColor = "#00ff00";
+      document.getElementById("2").style.backgroundColor = "#32CD32";
+      document.getElementById("12").style.backgroundColor = "#32CD32";
       break;
       case 6:
       document.getElementById("2").style.backgroundColor = "#0000ff";
       document.getElementById("12").style.backgroundColor = "#0000ff";
       break;
       case 7:
-      document.getElementById("2").style.backgroundColor = "#ff00ff";
-      document.getElementById("12").style.backgroundColor = "#ff00ff";
+      document.getElementById("2").style.backgroundColor = "#9400D3";
+      document.getElementById("12").style.backgroundColor = "#9400D3";
       break;
       case 8:
       document.getElementById("2").style.backgroundColor = "#cccccc";
@@ -192,6 +197,10 @@ function myFunction(val) {
       case -2:
       document.getElementById("2").style.backgroundColor = "#757575";
       document.getElementById("12").style.backgroundColor = "#757575";
+      break;
+      case 'x':
+      document.getElementById("2").style.backgroundColor = "#222222";
+      document.getElementById("12").style.backgroundColor = "#222222";
       break;
       default:
       document.getElementById("2").style.backgroundColor = "#000000";
@@ -215,13 +224,13 @@ function myFunction(val) {
       document.getElementById("13").style.backgroundColor = "#ffff00";
       break;
       case 5:
-      document.getElementById("13").style.backgroundColor = "#00ff00";
+      document.getElementById("13").style.backgroundColor = "#32CD32";
       break;
       case 6:
       document.getElementById("13").style.backgroundColor = "#0000ff";
       break;
       case 7:
-      document.getElementById("13").style.backgroundColor = "#ff00ff";
+      document.getElementById("13").style.backgroundColor = "#9400D3";
       break;
       case 8:
       document.getElementById("13").style.backgroundColor = "#cccccc";
@@ -235,6 +244,9 @@ function myFunction(val) {
       case -2:
       document.getElementById("13").style.backgroundColor = "#757575";
       break;
+      case 'x':
+      document.getElementById("13").style.backgroundColor = "#222222";
+      break;
       default:
       document.getElementById("13").style.backgroundColor = "#000000";
       break;
@@ -243,9 +255,9 @@ function myFunction(val) {
 var previous = 'x';
 function clickFunc(val){
   if((previous!='x')||previous==val){
-document.getElementById(previous).style.width="100px";
+document.getElementById(previous).style.width="50px";
   }
-document.getElementById(val).style.width="120px";
+document.getElementById(val).style.width="75px";
 previous=val;
 UpdateRead();
 }
@@ -253,9 +265,9 @@ UpdateRead();
 var previous2 = 'x';
 function clickFunc2(val){
   if((previous2!='x')||previous2==val){
-document.getElementById(previous2).style.width="100px";
+document.getElementById(previous2).style.width="50px";
   }
-document.getElementById(val).style.width="120px";
+document.getElementById(val).style.width="75px";
 previous2=val;
 UpdateRead();
 }
@@ -263,9 +275,9 @@ UpdateRead();
 var previous3 = 'x';
 function clickFunc3(val){
   if((previous3!='x')||previous3==val){
-document.getElementById(previous3).style.width="100px";
+document.getElementById(previous3).style.width="50px";
   }
-document.getElementById(val).style.width="120px";
+document.getElementById(val).style.width="75px";
 previous3=val;
 UpdateRead();
 }
@@ -273,9 +285,9 @@ UpdateRead();
 var previous4 = 'x';
 function clickFunc4(val){
   if((previous4!='x')||previous4==val){
-document.getElementById(previous4).style.width="100px";
+document.getElementById(previous4).style.width="50px";
   }
-document.getElementById(val).style.width="120px";
+document.getElementById(val).style.width="75px";
 previous4=val;
 UpdateRead();
 }
