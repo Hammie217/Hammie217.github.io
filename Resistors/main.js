@@ -289,7 +289,39 @@ document.getElementById(previous4).style.width="50px";
   }
 document.getElementById(val).style.width="75px";
 previous4=val;
-UpdateRead();
+UpdateRead2();
+}
+
+function UpdateRead2(){
+  switch(previous4.charAt(0)){
+    case 'a':
+    document.getElementById("ValueH2").innerHTML=("&plusmn;0.05%");
+    break;
+    case 'b':
+    document.getElementById("ValueH2").innerHTML=("&plusmn;0.1%");
+    break;
+    case 'c':
+    document.getElementById("ValueH2").innerHTML=("&plusmn;0.25%");
+    break;
+    case 'd':
+    document.getElementById("ValueH2").innerHTML=("&plusmn;0.5%");
+    break;
+    case 'e':
+    document.getElementById("ValueH2").innerHTML=("&plusmn;1%");
+    break;
+    case 'f':
+    document.getElementById("ValueH2").innerHTML=("&plusmn;2%");
+    break;
+    case 'g':
+    document.getElementById("ValueH2").innerHTML=("&plusmn;5%");
+    break;
+    case 'h':
+    document.getElementById("ValueH2").innerHTML=("&plusmn;10%");
+    break;
+    default:
+    document.getElementById("ValueH2").innerHTML=("&plusmn;0%");
+    break;
+  }
 }
 
 function UpdateRead(){
