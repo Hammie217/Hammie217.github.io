@@ -1,0 +1,22 @@
+input[type=text] {
+  width: 60% !important;
+    padding: 16px 20px !important;
+    border: none !important;
+    border-radius: 4px !important;
+    background-color: #181818 !important;
+  text-align: center !important;
+  color: white !important;
+  font-family: 'Comfortaa', cursive !important;
+  font-size: 2em !important;
+}
+
+
+html{
+  background-color: #222222;
+}
+
+canvas{
+  width: 60% !important;
+  height: 30vw !important;
+  margin-left: 20%;
+}

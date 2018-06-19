@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa:700" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <!-- assuming you've saved the file in the root of course -->
+<script src="nerdamer.core.js"></script> 
+<!-- LOAD ADD-ONS -->
+<!-- again assuming you've saved the files in root -->
+<script src="Algebra.js"></script>
+<script src="Calculus.js"></script>
+    <title>Graphing</title>
+</head>
+<body style="font-family: 'Comfortaa', cursive;">
+        <h1 style="color: white; text-align: center;font-size: 3.5em; "id="title" >Grapher!</h1>
+                <div style="text-align: center">
+                        <input type="text" name="txt" oninput="myFunction(this.value)" onpaste="myFunction(this.value)" placeholder="Equation:"><span style="color: white; font-size: 2em"></span>
+                </div>
+                <canvas id="myChart" ></canvas>
+
+
+        
+
+      
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
