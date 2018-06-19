@@ -1,8 +1,23 @@
+function Updater(){
+    myFunction(document.getElementById("title").innerHTML);
+}
+var xleft =0;
+function myFunction2(val) {
+    xleft=parseInt(val); //MAKE THESE TAKE FLOATS TOO
+}
+var xright =100;
+function myFunction4(val) {
+    xright=val;
+}
+var spacing =1;
+function myFunction3(val) {
+    spacing=parseFloat(val);
+}
 function myFunction(val) {
     var e = nerdamer(val);
     document.getElementById("title").innerHTML=(e.text());
     data =[];
-    for (i = 0; i < 100; i++) {
+    for (i = xleft; i <= xright; i=i+spacing) {
         try{
             var thingy ={x:  i,y: nerdamer(val,{x:i}).evaluate().text()};
             data.push(thingy)
@@ -33,7 +48,7 @@ var myChart = new Chart(ctx, {
         scales: {
             xAxes: [{
                 type: 'linear',
-                position: 'bottom'
+                position: 'bottom',
             }]
         }
     }

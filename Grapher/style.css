@@ -1,13 +1,52 @@
 input[type=text] {
-  width: 60% !important;
-    padding: 16px 20px !important;
-    border: none !important;
-    border-radius: 4px !important;
-    background-color: #181818 !important;
-  text-align: center !important;
-  color: white !important;
-  font-family: 'Comfortaa', cursive !important;
-  font-size: 2em !important;
+  width: 60% ;
+    padding: 16px 20px ;
+    border: none ;
+    border-radius: 4px ;
+    background-color: #181818 ;
+  text-align: center ;
+  color: white ;
+  font-family: 'Comfortaa', cursive ;
+  font-size: 2em ;
+}
+#buttonId{
+  width: 10% !important;
+  right: 0px;
+  height: 60px;
+  top: 300px;
+  position: absolute;
+  padding: 16px 20px ;
+    border: none ;
+    border-radius: 4px ;
+    background-color: #181818 ;
+  text-align: center ;
+  color: white ;
+  font-family: 'Comfortaa', cursive ;
+  font-size: 2em ;
+}
+
+#two{
+  width: 10% !important;
+  right: 0px;
+  height: 30px;
+  top: 30px;
+  position: absolute;
+}
+
+#four{
+  width: 10% !important;
+  right: 0px;
+  height: 30px;
+  top: 120px;
+  position: absolute;
+}
+
+#three{
+  width: 10% !important;
+  right: 0px;
+  height: 30px;
+  top: 210px;
+  position: absolute;
 }
 
 
