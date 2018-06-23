@@ -1,15 +1,15 @@
 function Updater(){
-    myFunction(document.getElementById("title").innerHTML);
+    myFunction(document.getElementById("one").value);
 }
-var xleft =0;
+var xleft =-10;
 function myFunction2(val) {
     xleft=parseInt(val); //MAKE THESE TAKE FLOATS TOO
 }
-var xright =100;
+var xright =10;
 function myFunction4(val) {
     xright=val;
 }
-var spacing =1;
+var spacing =0.1;
 function myFunction3(val) {
     spacing=parseFloat(val);
 }
@@ -17,9 +17,20 @@ function myFunction(val) {
     var e = nerdamer(val);
     document.getElementById("title").innerHTML=(e.text());
     data =[];
+    if(((xright-xleft)/spacing)>2000){
+        document.getElementById("title").innerHTML=("Too many points");
+    }
+    else if(((xright-xleft)/spacing)<2){
+        document.getElementById("title").innerHTML=("Not enough points");
+    }
+    else{
     for (i = xleft; i <= xright; i=i+spacing) {
         try{
             var thingy ={x:  i,y: nerdamer(val,{x:i}).evaluate().text()};
+            if((nerdamer(val,{x:i}).evaluate().text()>1000000000)||nerdamer(val,{x:i}).evaluate().text()<-1000000000){
+                document.getElementById("title").innerHTML=("Number too large");
+                break;
+            }
             data.push(thingy)
         }
         catch(e){
@@ -33,6 +44,7 @@ function myFunction(val) {
     myChart.data.datasets[0].data=data;
     myChart.update();
 }
+}
 
 
 var ctx = document.getElementById("myChart").getContext('2d');
@@ -41,14 +53,32 @@ var myChart = new Chart(ctx, {
     data: {
         datasets: [{
             label: 'Scatter Dataset',
-            data: [{x: -10,y: 0}, {x: 0,y: 10}, {x: 10,y: 5}]
+            data: [{x: -10,y: 0}, {x: 0,y: 10}, {x: 10,y: 5}],
+            pointBackgroundColor: "#4CAF50",
+            fill:false,
+            borderColor: '#4CAF50',
+            pointRadius: 0,
+            borderWidth:10
         }]
     },
     options: {
+        legend: {
+            display: false
+         },
         scales: {
             xAxes: [{
                 type: 'linear',
                 position: 'bottom',
+                ticks: {
+                    fontSize: 40
+                }
+            }],
+            yAxes: [{
+                type: 'linear',
+                position: 'left',
+                ticks: {
+                    fontSize: 40
+                }
             }]
         }
     }
