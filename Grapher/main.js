@@ -75,7 +75,7 @@ var myChart = new Chart(ctx, {
             }],
             yAxes: [{
                 type: 'linear',
-                position: 'left',
+                position: 'right',
                 ticks: {
                     fontSize: 40
                 }
