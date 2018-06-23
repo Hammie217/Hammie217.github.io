@@ -15,16 +15,24 @@
 <script src="Calculus.js"></script>
     <title>Graphing</title>
 </head>
-<body style="font-family: 'Comfortaa', cursive;">
+<body style="font-family: 'Comfortaa', cursive;"  onresize="onResizeEvent()">
         <h1 style="color: white; text-align: center;font-size: 3.5em; "id="title" >Grapher!</h1>
-                <div style="text-align: center">
+        <div class="row">
+                <div class="column output" >
                         <input type="text" name="txt" oninput="myFunction(this.value)" onpaste="myFunction(this.value)" id="one" placeholder="Equation:"><span style="color: white; font-size: 2em"></span>
-                        <input type="text" name="txt2" oninput="myFunction2(this.value)" onpaste="myFunction2(this.value)" id="two" placeholder="X-Left"><span style="color: white; font-size: 2em"></span>
+
+                        <canvas id="myChart" ></canvas>
+                </div>
+
+
+                <div class="column input" >
+                <div style="text-align: center">                        <input type="text" name="txt2" oninput="myFunction2(this.value)" onpaste="myFunction2(this.value)" id="two" placeholder="X-Left"><span style="color: white; font-size: 2em"></span>
                         <input type="text" name="txt4" oninput="myFunction4(this.value)" onpaste="myFunction4(this.value)" id="four" placeholder="X-Right"><span style="color: white; font-size: 2em"></span>
                         <input type="text" name="txt3" oninput="myFunction3(this.value)" onpaste="myFunction3(this.value)" id="three" placeholder="Spacing"><span style="color: white; font-size: 2em"></span>
                         <button type="button" onclick="Updater()" id="buttonId">Update</button>
                 </div>
-                <canvas id="myChart" ></canvas>
+                </div>
+            </div>
 
 
         

@@ -83,3 +83,12 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+
+function onResizeEvent(){
+    myChart.options.scales.xAxes[0].ticks.fontSize = window.innerWidth/50;
+    myChart.options.scales.yAxes[0].ticks.fontSize = window.innerWidth/50;
+    if(window.innerWidth<600){
+        myChart.options.scales.xAxes[0].ticks.fontSize = 15;
+        myChart.options.scales.yAxes[0].ticks.fontSize = 15;
+    }
+}
