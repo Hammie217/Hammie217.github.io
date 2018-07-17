@@ -68,9 +68,6 @@
           text-align: center;
           margin-top: 120px !important;
       }
-      .descrip{
-        font-size: 30px !important;
-      }
 
 }
 
@@ -119,49 +116,75 @@ html{
 /* The about link: 20px from the top with a green background */
 #about {
     top: 20px;
-    background-color: #4CAF50;
+    background-color: #d1726c; /* Red */
+
 }
 
 #blog {
     top: 80px;
-    background-color: #2196F3; /* Blue */
+    background-color: rgb(214, 203, 105); /* Blue */
 }
 
 #projects {
     top: 140px;
-    background-color: #f44336; /* Red */
+    background-color: rgb(115, 190, 117);
+
 }
 
 #contact {
     top: 200px;
-    background-color: #555 /* Light Black */
+    background-color: rgb(81, 146, 199); /* Blue */
 }
 
 .BackInBlack{
-  background-color: #222222;
+  background-color: rgb(34, 34, 34);
+}
+
+#icons {
+    position: relative;
+}
+
+#main {
+
+    background-color: rgba(26, 22, 22, 0.5);
+    height: 100vh;
+    padding-top: 200px;
 }
 
 .Middle{
-      width:60%;
-      height:200px;
+      width:100%;
       /*top:40%;*/
-      margin-top: 200px;
-      margin: 150px 0 0 25%;
+      margin: 0 auto;
+      text-align: center;
   }
 .mainName{
     color: white;
+    /* font-family: 'Comfortaa', cursive; */
+    font-size: 8vw;
     font-family: 'Comfortaa', cursive;
-    font-size: 7vw;
+    letter-spacing: 2px;
+    font-weight: 700;
+    padding-top: 50px;
+    width: 100%;
 }
 .UppermainName{
     color: white;
     font-family: 'Comfortaa', cursive;
     font-size: 7vw;
 }
+
+.descrip {
+    font-family: sans-serif;
+    font-weight: 300;
+    font-size: 2vw;
+    font-style: italic;
+    color: #4CAF50;
+}
 .Middle2{
       text-align: center;
-      margin-top: 20px;
+      margin-top: 100px;
   }
+
 
 .fa-lg{
   margin-right: 1.5vw;
@@ -178,12 +201,15 @@ a:hover {
 .progs:hover{
     color: #f44336;
 }
+
 h3{
   text-align: center;
-  color: #4CAF50;
-  margin-left: -10vh;
+  color: white;
   font-family: 'Montserrat', sans-serif;
   font-size: 2vw;
+  width: 60%;
+  margin: 0 auto 40px auto;
+  padding: 0;
 }
 span:hover{
   -webkit-transition: transform 0.2s ease-in-out;
@@ -199,14 +225,12 @@ span{
    color:#2196F3;
    font-family: 'Montserrat', sans-serif;
    font-size: 3vw;
-   margin-left: 90px;
-   margin-right: 90px;
 }
 .reports{
   text-align: center;
    color:white;
    font-family: 'Montserrat', sans-serif;
-   font-size: 2vw;
+   font-size: 1.5vw;
 }
 
 .programsHead{
@@ -214,14 +238,12 @@ span{
    color:#f44336;
    font-family: 'Montserrat', sans-serif;
    font-size: 3vw;
-   margin-left: 90px;
-   margin-right: 90px;
 }
 .programs{
   text-align: center;
    color:white;
    font-family: 'Montserrat', sans-serif;
-   font-size: 2vw;
+   font-size: 1.5vw;
 }
 .aboutHeader{
   text-align: center;
@@ -235,7 +257,25 @@ span{
   text-align: left;
    color:white;
    font-family: 'Montserrat', sans-serif;
-   font-size: 1em;
+   font-size: 1.3em;
+   width: 80%;
+   margin: 0 auto;
+   text-align: justify;
+}
+
+.about h2 {
+    text-align: center;
+    padding-top: 30px;
+}
+
+#cv {
+    width: 50%;
+    margin: 100px auto;
+}
+
+#cv p {
+    color: white;
+    font-style: italic;
 }
 
 .anim, .anim svg {
