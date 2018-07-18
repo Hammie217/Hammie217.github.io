@@ -289,4 +289,19 @@ span{
   }
   .anim path {
     stroke-width: 0.5;
+    width: 80%;
+  }
+
+  .FPGAFlexBox{
+      margin-top: 20px;
+    display: flex; /* or inline-flex */
+    justify-content: center;
+    align-content: space-between;
+      align-items: stretch;
+  }
+
+  .card{
+      margin-left: 20px;
+      margin-right: 20px;
+      
   }
