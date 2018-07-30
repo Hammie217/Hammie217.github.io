@@ -43,20 +43,20 @@
     #about {
         left: calc(50% - 245px) !important;
         top: 0px!important;
-        background-color: #4CAF50;
+        background-color: #d1726c;
 
     }
 
     #blog {
         left: calc(50% - 120px) !important;
           top: 0px!important;
-        background-color: #2196F3; /* Blue */
+        background-color: rgb(214, 203, 105); /* Blue */
     }
 
     #projects {
           left: calc(50% + 5px) !important;
             top: 0px!important;
-        background-color: #f44336; /* Red */
+        background-color: rgb(115, 190, 117); /* Red */
     }
 
     #contact {
@@ -75,7 +75,7 @@
   #about {
       left: calc(50% - 120px) !important;
       top: 65px!important;
-      background-color: #4CAF50;
+      background-color: #d1726c;
 
   }
   #contact {
@@ -178,7 +178,7 @@ html{
     font-weight: 300;
     font-size: 2vw;
     font-style: italic;
-    color: #4CAF50;
+    color: #d1726c;
 }
 .Middle2{
       text-align: center;
@@ -191,15 +191,15 @@ html{
 }
 a { color: inherit; }
 a:hover {
-    color: #4CAF50;
+    color: #d1726c;
 
 }
 .reps:hover{
-    color: #2196F3;
+    color: rgb(214, 203, 105);
 }
 
 .progs:hover{
-    color: #f44336;
+    color: rgb(115, 190, 117);
 }
 
 h3{
@@ -222,7 +222,7 @@ span{
 }
 .reportsHead{
   text-align: center;
-   color:#2196F3;
+   color: rgb(214, 203, 105);
    font-family: 'Montserrat', sans-serif;
    font-size: 3vw;
 }
@@ -235,7 +235,7 @@ span{
 
 .programsHead{
   text-align: center;
-   color:#f44336;
+   color: rgb(115, 190, 117);
    font-family: 'Montserrat', sans-serif;
    font-size: 3vw;
 }
@@ -252,6 +252,9 @@ span{
    font-size: 3vw;
    margin-left: 90px;
    margin-right: 90px;
+}
+.AboutHeaders{
+    color: rgb(81, 146, 199);
 }
 .about{
   text-align: left;
@@ -304,4 +307,9 @@ span{
       margin-left: 20px;
       margin-right: 20px;
       
+  }
+
+  .MainProjectTitles{
+    text-align: center;
+    padding-top: 30px;
   }
