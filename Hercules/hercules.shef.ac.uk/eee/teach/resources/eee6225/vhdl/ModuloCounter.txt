@@ -1,0 +1,42 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+
+entity ModuloCounter is
+
+    Generic ( M : integer := 23;   -- M : Modulus
+              N : integer :=  5 ); -- N : No of bits
+
+    Port ( clk,load,incr : in std_logic;
+           din   : in  std_logic_vector(N-1 downto 0);
+           value : out std_logic_vector(N-1 downto 0)   );
+
+end ModuloCounter;
+
+
+
+architecture rtl of ModuloCounter is
+
+    signal store : integer range 0 to M-1;
+
+begin
+
+   process (clk) begin
+      if rising_edge(clk) then
+         if load = '1' then
+            store <= conv_integer(din);			
+         elsif incr = '1' then
+            if (store = M-1) then
+               store <= 0;
+            else
+               store <= store + 1;
+            end if;
+         end if;
+      end if;
+   end process;
+
+   value <= conv_std_logic_vector(store,value'length);
+
+end rtl;

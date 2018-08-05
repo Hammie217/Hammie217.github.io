@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee6225/tutorials/nls_1g.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2015 08:35:41 GMT -->
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee6225/tutorials/tutorial_1g.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Sep 2017 15:53:14 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>EEE6225 Systems Design</title>
+<link href="../../eeeteach.css" rel="stylesheet" type="text/css" /><!--[if IE]>
+<style type="text/css"> 
+/* place css fixes for all versions of IE in this conditional comment */
+.thrColHybHdr #sidebar1, .thrColHybHdr #sidebar2 { padding-top: 30px; }
+.thrColHybHdr #mainContent { zoom: 1; padding-top: 15px; }
+/* the above proprietary zoom property gives IE the hasLayout it needs to avoid several bugs */
+</style>
+<![endif]-->
+</head>
+
+<body class="thrColLiqHdr">
+
+<div id="container">
+  <div id="header">
+    <h1><img src="../../banner.gif" width="480" height="60" alt="eee banner" /></h1>
+  <!-- end #header --></div>
+  <div id="sidebar1">
+    <p><a href="http://www.shef.ac.uk/eee">EEE Home</a></p>
+    <p><a href="../../index-2.html">All Years</a></p>
+    <p><a href="../../first.html">First Year</a></p>
+    <p><a href="../../second.html">Second Year</a></p>
+    <p><a href="../../third.html">Third Year</a></p>
+    <p><a href="../../fourth.html">Fourth Year</a></p>
+    <p><a href="../../msc.html" class="hilight">MSc Courses</a><br />
+      <!-- end #sidebar1 -->
+    </p>
+  </div>
+ 
+  <div id="mainContent">
+    <h1>EEE6225 Systems Design</h1>
+    <table border="0" width="100%">
+	<tr>
+		<td class="tbluet">Tutorial 1: Introduction to VHDL and Xilinx ISE </td>
+    </tr>    
+	<tr>
+		<td class="tblue" >Defining constraints</td>
+	</tr>
+    <tr>      
+		<td><p>There are a number of different types of design constraint understood
+		by ISE.&nbsp; Constraints are used to provide further details of the
+		designers intent not covered by the VHDL descriptions. Typical
+		constraints concern timing (the desired clock rate), area (how the
+		design should be <strong>floor-planned</strong> and which physical pins should be used.</p>
+		<p>This may be considered a more advanced topic however defining both
+		timing and pin constraints are necessary in order to get a design
+		working on a real FPGA device.</p></td>
+    </tr>
+    <tr>
+		<td class="tblue">1. Implementation constraints file</td>
+	</tr>
+    <tr>
+		<td><p>To fully implement the design you need to do some things first. The connections into your
+		design (in this case: A, B, sel and Q) are not yet assigned to particular pins on the FPGA and to
+		do this you must apply some constraints specifying the assignment of signals to pins 
+		(there are other constraints that can be set but we will not worry about these). 
+		To do this we need an <strong>Implementation Constraints File</strong>. The tool will automatically
+		create one assuming the top level is defined and <strong>Yes</strong> is answered to the question
+		in Figure 1 <strong>when</strong> required by one of the tools (eg. PlanAhead)</p></td>
+	</tr>		
+	<tr align="center">
+      <td><img alt="" src="images/ise_constraints1.jpg" style="width: 400px; height: 180px;"><br>
+      <em>Figure 1. Creating an implementation constraints file</em></td>
+    </tr>				
+	<tr>
+        <td><p>NOTE: for a larger project with many VHDL files the <strong>implementation constraints file</strong> must
+        be associated with the top-most level of the design. The <strong>entity ports</strong> of the top most design
+		entity are automatically assumed to be mapped to package pins of the FPGA. It is up to you to tell the tool which pins
+		to use (if you dont they will be assigned randomly)!</p></td>
+	</tr>
+	<tr>
+		<td class="tblue">2. Assigning Package Pins</td>
+	</tr>
+    <tr>
+		<td><p>With the top level module in the design selected in the <strong>hierarchy</strong> window look at the
+		<strong>Processes</strong> window at the <strong>User Constraints</strong> line click the plus if needed
+		to expand the items and then double click <strong>IO Pin Planning (PlanAhead) - Pre-Synthesis</strong> item
+		to execute the <strong>PlanAhead</strong> tool.  If the UCF file does not exist then the question as in
+		Figure 1 will be displayed (answer yes).  After several seconds the PlanAhead view will be displayed.  This
+		provides many views of the device so can take some time to find your way around it.</p></td>		
+	</tr>
+	<tr align="center">
+      <td><img alt="" src="images/ise_constraints2.jpg" style="width: 600px; height: 400px;"><br>
+      <em>Figure 2. PlanAhead assigning I/O pins</em></td>
+    </tr>	
+	<tr>
+		<td>
+			<p>At the bottom of the window is the <strong>I/O Ports</strong> section and the task is to add the
+			<strong>Site</strong> (pin location) to each of the inputs and outputs.  The values entered are specific
+			to each type of board and the reference documentation for the available boards should be consulted to
+			choose suitable switches and LED to test your design.<br> 
+			<a href="../fpga_boards.html">Link to Fpga Board Documentation</a></p>
+			<p>For the Digilent Spartan 3 board these are:
+			<ul>
+			<li>For A   enter F12 to allow connection to board slide switch SW0,</li>
+			<li>For B   enter G12 to allow connection to board slide switch SW1,</li>
+			<li>For Q   enter K12 to allow connection to light emitting diode LED0,</li>
+			<li>For sel enter P56 to allow connection to board slide switch SW7.</li>		
+			</ul></p>
+			<p>Finally, click on the Save Constraints Icon (top left disk icon) or simply CTRL-S to save and
+			exit PlanAhead.</p>
+		</td>
+	</tr>				
+    <tr>
+      <td class="tblue">3. Timing constraints</td></tr>
+      <tr>
+        <td><p>The mux example is too trivial to apply timing constraints so this section can be
+		<em><strong>skipped</strong></em>.  As an illustrative example the LFSR from tutorial 2 is used.
+		You may wish to review this section after completing tutorial 2.</p>
+		<p>However, for larger designs including sequential logic (use a clock)	the design tools need to be told what frequency you wish to operate at. This allows the built
+		in optimiser to work effectivly and carry out a process known as <strong>timing closure</strong>.
+		This automatically ensures that the given design in terms of its critical path will meet your 
+		requirements (or generate a suitable error message).</p>		
+        <p>First check the top level module is selected in the <strong>Hierarchy</strong> window. In
+        the <strong>Processes</strong> window, expand the <strong>User Constraints</strong> item to reveal
+		the <strong>Create Timing Constraints</strong> item and double click on this. Your code
+            should automatically be synthesised (if required) and the <strong>Constraints Editor</strong> displayed
+        (Figure 3). This should list all the clock networks in your design, initially in the <strong>unconstrained</strong> section.</p></td>
+	</tr>
+	<tr align="center">
+		<td><img alt="" src="images/ise_constraints3.jpg" style="width: 600px; height: 400px;"><br>
+		<em>Figure 3. Constraints Editor</em></td>
+	</tr>
+    <tr>
+		<td><p>For each clock, double click on its name this will activate a form allowing a
+		more user-friendly entry of the timing constraints (alternatively data can be entered into the table directly).
+		If there are any "clocks" you dont recognise then contact a demonstrator for advice.</p>
+		
+		<p>As shown in Figure 4, select the <strong>Specify time</strong> option and enter a value of 50 with units of MHz.
+		This is to match the clock source on the development board.  Finally, click on <strong>Create</strong> or <strong>Close</Strong>,
+		the clock name should now appear in the upper half of the window (Figure 3) with the defined frequency.  Click on the save icon
+		or CTRL-S to save the new constraints to the UCF file.</p>
+		<p>NOTE: at a more advanced level, this clock may be used to generate a different frequency using 
+		on of the clock manager elements inside the FPGA.  Also, a clock constraint only constrains paths between sequencial
+		elements withing the device, there are also paths from the device inputs and outputs to internal elements which also
+		require additional <strong>path</strong> constraints.</p></td>
+	</tr>
+	<tr align="center">
+		<td><img alt="" src="images/ise_constraints4.jpg" style="width: 300px; height: 450px;"><br>
+		<em>Figure 4. Defining clock frequency</em></td>
+	</tr>	
+    <tr>
+		<td class="tblue" >4. Repeat Synthesis</td>
+	</tr>
+	<tr>
+		<td><p>From the Project Navigator's <strong>Hierarchy</strong> window, make sure the top level module is selected. 
+		Then from the <strong>Processes</strong> window double click the main <strong>Synthesize-XST</strong> again to
+		carry out a full synthesis of the design, constraints included. If there is a green tick next to the
+		<strong>Synthesize-XST</strong> item, right-click on it and select <strong>Rerun</strong>.</p></td>
+    </tr>
+    <tr>
+      <td>Continue on to <a href="tutorial_1h.html">Place and Route</a><br>
+      </td>
+    </tr>
+
+</table>
+   <!-- end #mainContent -->
+  </div>
+	<!-- This clearing element should immediately follow the #mainContent div in order to force the #container div to contain all child floats --><br class="clearfloat" />
+   <div id="footer">
+    <div id="footer2">
+      <div id="footerLeft">© 2014 The University of Sheffield </div>
+    </div>
+    <p>&nbsp;</p>
+  <!-- end #footer --></div>
+<!-- end #container --></div>
+</body>
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee6225/tutorials/nls_1g.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2015 08:36:07 GMT -->
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee6225/tutorials/tutorial_1g.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Sep 2017 15:53:34 GMT -->
+</html>

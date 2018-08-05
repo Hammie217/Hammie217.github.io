@@ -1,0 +1,94 @@
+-- This example starts with the add-with-carry module from the coding examples
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+
+-- Must add the following library for conversion functions
+use ieee.std_logic_arith.ALL;
+use ieee.std_logic_unsigned.ALL;
+
+ENTITY addwithcarry_tb_test_beh_vhd_tb IS
+END addwithcarry_tb_test_beh_vhd_tb;
+
+ARCHITECTURE behavior OF addwithcarry_tb_test_beh_vhd_tb IS 
+
+	-- EXERCISE try reducing delay and find out when post place and route simulation
+	-- no longer agrees with the behavioral model
+	constant DELAY : time := 20 ns;
+	
+	-- Define length of adder in bits
+	constant NB : integer := 8;
+
+	COMPONENT addwithcarry	
+	GENERIC ( N : integer := NB );
+	PORT(
+		A,B : IN std_logic_vector(NB-1 downto 0);		
+		CarryIn : IN std_logic;          
+		Sum : OUT std_logic_vector(NB-1 downto 0);
+		CarryOut : OUT std_logic
+		);
+	END COMPONENT;
+
+	SIGNAL A,B :  std_logic_vector(NB-1 downto 0);	
+	SIGNAL CarryIn :  std_logic;
+	SIGNAL Sum :  std_logic_vector(NB-1 downto 0);
+	SIGNAL CarryOut :  std_logic;
+
+	-- definition of a function to convert from integer to std_logic
+
+	function conv_std_logic ( int_arg : integer ) return std_logic is	
+	begin
+		if int_arg = 1 then
+			return '1';
+		elsif int_arg = 0 then
+			return '0';
+		else
+			assert(false) report "ERROR, CONV_STD_LOGIC expected 0 or 1" severity warning;
+			return 'X';
+		end if;	
+	end function;	
+
+
+BEGIN
+
+	uut: addwithcarry	 PORT MAP(
+		A => A,
+		B => B,
+		CarryIn => CarryIn,
+		Sum => Sum,
+		CarryOut => CarryOut
+	);
+
+
+-- *** Test Bench - User Defined Section ***
+   tb : PROCESS
+		variable test_out,test_ref : integer;
+   BEGIN
+
+		for tv_a in 0 to 2**NB-1 loop
+			A <= conv_std_logic_vector(tv_a,NB);		
+			for tv_b in 0 to 2**NB-1 loop
+				B <= conv_std_logic_vector(tv_b,NB);
+				for tv_cin in 0 to 1 loop
+					CarryIn <= conv_std_logic(tv_cin);
+					wait for DELAY;
+										
+					test_out := (conv_integer(CarryOut) * 2**NB) + conv_integer(Sum);
+					test_ref := tv_a + tv_b + tv_cin;
+
+					-- EXERCISE: break the UUT to see if you can detect incorrect answers....
+					
+					assert (test_out = test_ref)
+						report "test failed " & integer'image(test_out) & " != " & integer'image(test_ref)
+						severity warning;
+
+				end loop;
+			end loop;
+		end loop;
+
+      wait; -- will wait forever
+   END PROCESS;
+-- *** End Test Bench - User Defined Section ***
+
+END;

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee6225/tutorials/nls_2e.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2015 08:36:50 GMT -->
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee6225/tutorials/tutorial_2e.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Sep 2017 15:55:05 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>EEE6225 Systems Design</title>
+<link href="../../eeeteach.css" rel="stylesheet" type="text/css" /><!--[if IE]>
+<style type="text/css"> 
+/* place css fixes for all versions of IE in this conditional comment */
+.thrColHybHdr #sidebar1, .thrColHybHdr #sidebar2 { padding-top: 30px; }
+.thrColHybHdr #mainContent { zoom: 1; padding-top: 15px; }
+/* the above proprietary zoom property gives IE the hasLayout it needs to avoid several bugs */
+</style>
+<![endif]-->
+</head>
+
+<body class="thrColLiqHdr">
+
+<div id="container">
+  <div id="header">
+    <h1><img src="../../banner.gif" width="480" height="60" alt="eee banner" /></h1>
+  <!-- end #header --></div>
+  <div id="sidebar1">
+    <p><a href="http://www.shef.ac.uk/eee">EEE Home</a></p>
+    <p><a href="../../index-2.html">All Years</a></p>
+    <p><a href="../../first.html">First Year</a></p>
+    <p><a href="../../second.html">Second Year</a></p>
+    <p><a href="../../third.html">Third Year</a></p>
+    <p><a href="../../fourth.html">Fourth Year</a></p>
+    <p><a href="../../msc.html" class="hilight">MSc Courses</a><br />
+      <!-- end #sidebar1 -->
+    </p>
+  </div>
+ 
+  <div id="mainContent">
+    <h1>EEE6225 Systems Design</h1>
+    
+<table border="0" width="100%">
+	<tr>
+      <td class="tbluet" >Tutorial 2: Linear Feedback Shift Register</td>
+    </tr>
+    <tr>
+      <td class="tblue">Onward design</td>
+	</tr>
+    <tr>
+      <td><p>Now back in <strong>Project Navigator</strong> we need to create
+	  a new <strong>VHDL Module</strong> file called <em>lfsr_toplevel</em>. We'll use this to
+	  hold our <em>lfsr</em> and stimulate it with a suitable clock. When setting the ports, use the entity
+	  description below to help you. When asked to set the ports for this new module, use the ports as defined
+	  in the <em>lfsr_toplevel</em> entity example shown below. Once the file has been created, edit it to match
+	  that laid out below in Figure 1.</p></td>
+	</tr>
+	<tr align="center">
+		<td><img alt="" src="images/ise_lfsr4.jpg" style="width: 600px; height: 690px;"><br>
+		<em>Figure 1. LFSR driven by slow clock</em></td>
+	</tr>
+    <tr>
+		<td><p><strong>QUESTION:</strong> Can you see what the code is designed to do?</p>
+		<p>Check syntax and then Synthesize LFSR_toplevel correcting any problems as they occur.</p></td>
+    </tr>
+    <tr>
+      <td class="tblue">Assign Package Pins</td>
+    </tr>
+    <tr>
+		<td><p>Now create a constraints file for the <em>LFSR_toplevel</em> module and set its pin allocations using
+		<strong>PlanAhead</strong> as given in the table below. <strong>Note:</strong> these pins are for the Digilent S3 board <strong>ONLY</strong>.
+		For other boards see <a href="../fpga_boards.html">FPGA board reference manuals</a>.		
+		<ul>
+		<li>clk:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T9 (50MHz clock oscillator input)</li>
+		<li>reset: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L14 (BTN4 - user reset)</li>
+		<li>q&lt;15&gt;:&nbsp;&nbsp;&nbsp;&nbsp;P11 (LED7)</li>
+		<li>q&lt;14&gt;:&nbsp;&nbsp;&nbsp; P12 (LED6)</li>
+		<li>q&lt;13&gt;:&nbsp;&nbsp;&nbsp; N12 (LED5)</li>
+		<li>q&lt;12&gt;:&nbsp;&nbsp;&nbsp; P13 (LED4)</li>
+		<li>q&lt;11&gt;:&nbsp;&nbsp;&nbsp; N14 (LED3)</li>
+		<li>q&lt;10&gt;:&nbsp;&nbsp;&nbsp; L12 (LED2)</li>
+		<li>q&lt;9&gt; &nbsp;:&nbsp;&nbsp;&nbsp; P14 (LED1)</li>
+		<li>q&lt;8&gt; &nbsp;:&nbsp;&nbsp;&nbsp; K12 (LED0)</li>
+		<li>Don't do anything with the other Q outputs</li>
+		</ul>
+		</p></td>
+	</tr>
+	<tr>
+		<td class="tblue">Implement design</td>
+	</tr> 
+	<tr>
+		<td><p>Now Synthesize again and then Implement and Generate Programming File of the design in the usual way.</p></td>
+    </tr>
+    <tr>
+      <td class="tblue">Programming the FPGA and testing</td>
+	</tr>
+    <tr>
+		<td><p>Download your design into an FPGA board using the correct programming
+		tool and see what happens when it starts to run. </p>
+		<p>Talk with the demonstrator about what you have seen and allow the
+		demonstrator to confirm that your circuit is working properly.</p>
+		<p><strong>OPTIONAL:</strong> the keener students may wish to use the 4 off 7-segment displays on the Diglent board
+		to display the LFSR value in hexadecimal.  This requires inplementing a multiplexer (4-way 4-bit), a 4-bit binary nibble to 7-segment
+		decoder together with a counter (2-bit) and 2-to-4 line decoder to drive the cathode and anode lines of the display.
+		Are you up to this challenge?</p>
+		</td>
+    </tr>
+    <tr>
+      <td>Continue on to <a href="exercise_2.html">Exercise</a></td>
+    </tr>
+</table>
+  <!-- end #mainContent -->
+  </div>
+	<!-- This clearing element should immediately follow the #mainContent div in order to force the #container div to contain all child floats --><br class="clearfloat" />
+   <div id="footer">
+    <div id="footer2">
+      <div id="footerLeft">© 2014 The University of Sheffield </div>
+    </div>
+    <p>&nbsp;</p>
+  <!-- end #footer --></div>
+<!-- end #container --></div>
+</body>
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee6225/tutorials/nls_2e.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2015 08:36:50 GMT -->
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee6225/tutorials/tutorial_2e.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Sep 2017 15:55:07 GMT -->
+</html>

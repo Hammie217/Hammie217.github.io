@@ -1,0 +1,86 @@
+-- This example starts with the LFSR tutorial.  Add a new module of type VHDL testbench.
+-- Next modify the file as shown to add the following process to define a clock
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+
+ENTITY lfsr_tb_lfsr_vhd_tb IS
+END lfsr_tb_lfsr_vhd_tb;
+
+ARCHITECTURE behavior OF lfsr_tb_lfsr_vhd_tb IS 
+
+
+	-- Add a line to define the clock period (makes code more readable)
+	constant PERIOD : time := 100 ns;
+	constant RESET_DELAY : time := 514 ns;
+
+	-- component definition put in by ISE
+	COMPONENT lfsr
+	PORT(
+		clk : IN std_logic;
+		reset : IN std_logic;          
+		Q : OUT std_logic_vector(15 downto 0)
+		);
+	END COMPONENT;
+
+	-- give the clock and reset lines default values
+	SIGNAL clk :  std_logic := '0';
+	SIGNAL reset :  std_logic := '0';
+	SIGNAL Q :  std_logic_vector(15 downto 0);
+
+	-- add signal clk_enable with default of 1
+	signal clk_enable : std_logic := '1';
+
+BEGIN
+
+	-- component instantiation put in by ISE
+	uut: lfsr PORT MAP(
+		clk => clk,
+		reset => reset,
+		Q => Q
+	);
+
+
+	-- Add a process to define the clock which is stopped by a signal
+	-- this allows the convenient use of the Modelsim "run -all" command.
+	-- There are many other ways of implementing this too can be done with
+	-- a single conditional assignemnt statement including an after clause (try as an EXERCISE)
+
+	clk_gen: process
+	begin
+		if clk_enable = '1' then
+			clk <= not clk;
+			wait for PERIOD/2;
+		else
+			wait; -- unconditional wait prevents further activity on this process			
+		end if;
+	end process;
+
+-- *** Test Bench - User Defined Section ***
+-- This is modified to pulse the reset line, wait for a number of cycles and
+-- finally shutdown the clock generator (if clk_gen was allowed to continue
+-- "run -all" would execute indefinately.
+   tb : PROCESS
+   BEGIN
+
+		-- wait for a while then pulse the reset line for exactly one clock cycle
+		wait for RESET_DELAY;
+		wait until rising_edge(clk);
+		reset <= '1';
+		wait until rising_edge(clk);
+		reset <= '0';
+
+		-- wait for 2**15 cycles of time
+		for i in 0 to 2**16 -1 loop
+			wait until rising_edge(clk);
+		end loop;
+		
+		
+		clk_enable <= '0'; -- perminantly shuts down clk_gen process
+		report "*** Simulation completed ***" severity note;
+      wait; -- will wait forever (if this is removed tb will start over)
+   END PROCESS;
+-- *** End Test Bench - User Defined Section ***
+
+END;
