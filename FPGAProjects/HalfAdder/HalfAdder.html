@@ -46,7 +46,12 @@
               <div class="col-md-8">
                   <div class="about">
                       <h1 class="MainProjectTitles">Description</h1>
+					  A Half adder is a circuit designed to add two binary numbers, usually 1 bit long, If we are adding two one bit numbers then the maximum value to output is 2 which requires 2 output bits.
+						Thinking logically we can tell that if either inputs are high then out LSB should be high but not if both, this perfectly describes the xor function and completely solves the LSB. Now we need to think of the carry, for this our carry will only be on when both inputs are high which is the and function.
+						Using these simple logical derivations we get the circuit diagram shown below:
                       <img src="HalfAdderSchematic.svg" style="margin-left: auto;display: block;margin-right: auto; width: 60%"> </img>
+					  This is the default schematic for a half adder which is seen everywhere.
+					  The issue with this circit is we cannot directly input one half adder into another to increse the bitsize as we have this carry out but nowhere to input it, this is fixed by using a full adder which is explained later.
                       <h1 class="MainProjectTitles">Plan</h1>
                       <h1 class="MainProjectTitles">Hardware</h1>
                       <h1 class="MainProjectTitles">Code</h1>
