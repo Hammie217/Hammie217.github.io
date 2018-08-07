@@ -11,6 +11,7 @@
     crossorigin="anonymous">
     <link href="css/prism.css" rel="stylesheet" />
   <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css" data-noprefix />
   <link href="https://fonts.googleapis.com/css?family=Stardos+Stencil" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -21,10 +22,10 @@
 <body class="BackInBlack">
 
   <div id="mySidenav" class="sidenav">
-    <a href="index.html" id="about">Home</a>
-    <a href="reports.html" id="blog">Reports</a>
-    <a href="programs.html" id="projects">Programs</a>
-    <a href="about.html" id="contact">About</a>
+    <a href="../../index.html" id="about">Home</a>
+    <a href="../../reports.html" id="blog">Reports</a>
+    <a href="../../programs.html" id="projects">Programs</a>
+    <a href="../../about.html" id="contact">About</a>
   </div>
 
   <div class="Middle2">
@@ -53,8 +54,12 @@
 					  This is the default schematic for a half adder which is seen everywhere.
 					  The issue with this circit is we cannot directly input one half adder into another to increse the bitsize as we have this carry out but nowhere to input it, this is fixed by using a full adder which is explained later.
                       <h1 class="MainProjectTitles">Plan</h1>
+					  As we have a circuit diagram for our program we can define the functions easily without the need for synchronous logic as our circuit doesn't depend on any clock signal.
                       <h1 class="MainProjectTitles">Hardware</h1>
+					  For this all we need are the FPGA dev board and 2 inputs and 2 outputs if your board doesn't already have them onboard.
                       <h1 class="MainProjectTitles">Code</h1>
+					  <pre><code class="language-vhdl">TEST VHDL
+</code></pre>
                 </div>
               </div>
             </div>
@@ -76,7 +81,7 @@
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-    <script src="js/prism.js"></script>
+    <script src="../../js/prism.js"></script>
 </body>
 
 </html>
