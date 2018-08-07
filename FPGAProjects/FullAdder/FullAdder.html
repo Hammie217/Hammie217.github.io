@@ -47,9 +47,13 @@
               <div class="col-md-8">
                   <div class="about">
                       <h1 class="MainProjectTitles">Description</h1>
+					  A Full adder compared to a half adder acts like it adds three 1 bit numbers, this means the maximum is 3 which is a 2 bit number. A full adder therfore takes 3 inputs and 2 outputs allowing for devices to be put in series to encode larger numbers. Effectively a full adder is two half adders with the carry out pins or-ed. You can logically think through the design after realising these small secrets.  
                       <img src="FullAdderSchematic.svg" style="margin-left: auto;display: block;margin-right: auto; width: 60%"> </img>
+					  The brilliant thing of this circuit is the fact it allows cascading to sum any sized binary input numbers 
                       <h1 class="MainProjectTitles">Plan</h1>
+					  For this there are two ways to go, use the pre-defined half adders to make the full adder, or second we could define the logic directly using the circuit diagram shown above.
                       <h1 class="MainProjectTitles">Hardware</h1>
+					  To test our HDL all we need is a FPGA board with 3 inputs and 2 outputs either directly onboard or externally attached.
                       <h1 class="MainProjectTitles">Code</h1>
 					  <pre><code class="language-vhdl">TEST VHDL
 </code></pre>
