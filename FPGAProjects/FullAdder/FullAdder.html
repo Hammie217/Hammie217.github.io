@@ -11,7 +11,7 @@
     crossorigin="anonymous">
     <link href="css/prism.css" rel="stylesheet" />
   <link rel="stylesheet" href="../../css/style.css">
-
+  <link rel="stylesheet" href="../../css/prism.css" data-noprefix />
   <link href="https://fonts.googleapis.com/css?family=Stardos+Stencil" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -55,8 +55,46 @@
                       <h1 class="MainProjectTitles">Hardware</h1>
 					  To test our HDL all we need is a FPGA board with 3 inputs and 2 outputs either directly onboard or externally attached.
                       <h1 class="MainProjectTitles">Code</h1>
-					  <pre><code class="language-vhdl">TEST VHDL
-</code></pre>
+					  <pre><code class="language-vhdl">library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity FullAdder is
+    Port ( 
+            A : in STD_LOGIC;
+            B : in STD_LOGIC;
+            Ci : in STD_LOGIC;
+            S : out STD_LOGIC;
+            Co : out STD_LOGIC);
+end FullAdder;
+
+architecture Behavioral of FullAdder is
+
+    signal sig1 : STD_LOGIC;
+    signal sig2 : STD_LOGIC;
+    signal sig3 : STD_LOGIC;
+
+begin
+    sig1 <= A XOR B;
+    S <= sig1 XOR Ci;
+    sig3 <= A AND B;
+    sig2 <= sig1 AND Ci;
+    Co <= sig3 OR sig2;
+    
+end Behavioral;</code></pre>
+Basys3 XDC file
+<pre><code class="language-vhdl">## Switches
+set_property PACKAGE_PIN V17 [get_ports {A}]		
+  set_property IOSTANDARD LVCMOS33 [get_ports {A}]
+set_property PACKAGE_PIN V16 [get_ports {B}]		
+  set_property IOSTANDARD LVCMOS33 [get_ports {B}]
+set_property PACKAGE_PIN W16 [get_ports {Ci}]			
+  set_property IOSTANDARD LVCMOS33 [get_ports {Ci}]     
+
+## LEDs
+set_property PACKAGE_PIN U16 [get_ports {S}]		
+  set_property IOSTANDARD LVCMOS33 [get_ports {S}]
+set_property PACKAGE_PIN E19 [get_ports {Co}]	
+  set_property IOSTANDARD LVCMOS33 [get_ports {Co}]</code></pre>
 					  </div>
               </div>
             </div>

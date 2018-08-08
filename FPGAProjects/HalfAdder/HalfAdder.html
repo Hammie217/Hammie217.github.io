@@ -58,7 +58,32 @@
                       <h1 class="MainProjectTitles">Hardware</h1>
 					  For this all we need are the FPGA dev board and 2 inputs and 2 outputs if your board doesn't already have them onboard.
                       <h1 class="MainProjectTitles">Code</h1>
-					  <pre><code class="language-vhdl">TEST VHDL
+					  <pre><code class="language-vhdl">library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity Half_Adder is
+    Port ( A : in STD_LOGIC;
+            B : in STD_LOGIC;
+            Ci : in STD_LOGIC;
+            S : out STD_LOGIC;
+            Co : out STD_LOGIC
+            );
+end Half_Adder;
+
+architecture Behavioral of Half_Adder is
+
+    signal sig1 : STD_LOGIC;
+    signal sig2 : STD_LOGIC;
+    signal sig3 : STD_LOGIC;
+
+begin
+    sig1 <= A XOR B;
+    S <= sig1 XOR Ci;
+    sig3 <= A AND B;
+    sig2 <= sig1 AND Ci;
+    Co <= sig3 OR sig2;
+    
+end Behavioral;            
 </code></pre>
                 </div>
               </div>

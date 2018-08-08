@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+    <link href="css/prism.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css" data-noprefix />
+  <link href="https://fonts.googleapis.com/css?family=Stardos+Stencil" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa:700" rel="stylesheet">
+  <title>Clock</title>
+</head>
+
+<body class="BackInBlack">
+
+  <div id="mySidenav" class="sidenav">
+    <a href="../../index.html" id="about">Home</a>
+    <a href="../../reports.html" id="blog">Reports</a>
+    <a href="../../programs.html" id="projects">Programs</a>
+    <a href="../../about.html" id="contact">About</a>
+  </div>
+
+  <div class="Middle2">
+    <h1 class="UppermainName">FPGA Clock</h1>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                  <div class="about" style="text-align: center;">
+                      <h2>Skills</h2>
+                      Digital gates <br />
+                      VHDL
+                      <h2>Hardware</h2>
+                      Basys3
+                      <h2>Software</h2>
+                      Vivado
+                  </div>
+              </div>
+              <div class="col-md-8">
+                  <div class="about">
+                      <h1 class="MainProjectTitles">Description</h1>
+                      <h1 class="MainProjectTitles">Plan</h1>
+                      <h1 class="MainProjectTitles">Hardware</h1>
+                      <h1 class="MainProjectTitles">Code</h1>
+					  <pre><code class="language-vhdl">library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+  
+entity tutorial_led_clock is
+  port (
+  -- clock input
+    i_clock     : in  std_logic;
+  -- Input buttons
+  UpHours		: in  std_logic;
+  UpMins		: in  std_logic;
+    -- 7 segment led outputs
+  o_SegA		: Out std_logic;
+  o_SegB		: Out std_logic;
+  o_SegC		: Out std_logic;
+  o_SegD		: Out std_logic;
+  o_SegE		: Out std_logic;
+  o_SegF		: Out std_logic;
+  o_SegG		: Out std_logic;
+  o_SegDP		: Out std_logic;
+  o_SegCA0 	: out std_logic;
+  o_SegCA1 	: out std_logic;
+  o_SegCA2 	: out std_logic;
+  o_SegCA3 	: out std_logic;
+  -- LEDS to show seconds ( 15 needed with 1 gap in the middle)
+  o_LED0		: Out std_logic;
+  o_LED1		: Out std_logic;
+  o_LED2		: Out std_logic;
+  o_LED3		: Out std_logic;
+  o_LED4		: Out std_logic;
+  o_LED5		: Out std_logic;
+  o_LED6		: Out std_logic;
+  o_LED7		: Out std_logic;
+  o_LED8		: Out std_logic;
+  -- Tens of Seconds LEDs
+  o_LED11		: Out std_logic;
+  o_LED12		: Out std_logic;
+  o_LED13		: Out std_logic;
+  o_LED14		: Out std_logic;
+  o_LED15		: Out std_logic
+    );
+end tutorial_led_clock;
+  
+architecture rtl of tutorial_led_clock is
+  
+  -- clock value comparison
+  constant c_CNT_1HZ   		: natural := 100000000;
+  -- clock current clock value
+  signal r_CNT_1HZ   		: natural range 0 to c_CNT_1HZ;
+  -- clock value comparison
+  constant c_CNT_100kHZ   		: natural := 32000;
+  -- clock current clock value
+  signal r_CNT_100kHZ   		: natural range 0 to c_CNT_100kHZ;
+  -- seconds
+  signal r_Seconds   		: natural range 0 to 10;
+  -- tens of seconds
+  signal r_TensOfSeconds   	: natural range 0 to 6;
+  -- Minutes
+  signal r_Minutes   		: natural range 0 to 10;
+  -- Tens of Minutes
+  signal r_TensOfMinutes 	: natural range 0 to 6;
+  -- Hours
+  signal r_Hours   			: natural range 0 to 10;
+  -- Tens of Hours
+  signal r_TensOfHours 		: natural range 0 to 6;
+  -- Button Held
+  signal r_UpHoursHeld		:  std_logic;
+    
+    --Debounce timer
+    signal debouncetime       : natural range 0 to 50000;
+    
+    signal r_UpMinsHeld		:  std_logic;
+      
+      --Debounce timer
+      signal debouncetimeMins       : natural range 0 to 50000;
+    
+begin
+    
+  p_1_HZ : process (i_clock) is -- Count up every second
+  begin
+    if rising_edge(i_clock) then
+      if(r_CNT_1HZ = c_CNT_1HZ -1) then
+      r_CNT_1HZ <= 0;
+      r_Seconds <= r_Seconds +1;
+      
+                
+      
+    else
+        if(r_Seconds = 10) then
+            r_Seconds <= 0;
+            r_TensOfSeconds <= r_TensOfSeconds +1;
+        end if;
+                      
+        if(r_TensOfSeconds = 6 or (UpMins='1' and r_UpMinsHeld='0' and debouncetimeMins = 0))then
+            r_UpMinsHeld <='1';
+            debouncetimeMins <=1;
+            r_TensOfSeconds <= 0;
+            r_Minutes <= r_Minutes+1;
+            else
+            r_upMinsHeld <= '0';
+        end if;
+        
+        if(Upmins='1') then
+                debouncetimemins<=1;
+                end if;
+                
+                if(debouncetimemins>0) then
+                if(debouncetimemins=49999)  then
+                debouncetimemins <=0;
+                else
+                if(Upmins='0') then
+                debouncetimemins <= debouncetimemins +1;
+                end if;
+                end if;
+                end if;
+        
+        if(r_Minutes=10) then
+            r_Minutes<=0;
+            r_TensOfMinutes<=r_TensOfMinutes +1;
+        end if;
+        
+        if(r_TensOfMinutes=6 or (UpHours='1' and r_UpHoursHeld='0' and debouncetime = 0)) then
+        r_UpHoursHeld<='1';
+        debouncetime<=1;
+            r_TensOfMinutes <=0;
+            r_Hours <= r_Hours +1;
+            else
+            r_UpHoursHeld<='0';
+        end if;
+        
+        if(UpHours='1') then
+        debouncetime<=1;
+        end if;
+        
+        if(debouncetime>0) then
+        if(debouncetime=49999)  then
+        debouncetime <=0;
+        else
+        if(UpHours='0') then
+        debouncetime <= debouncetime +1;
+        end if;
+        end if;
+        end if;
+        
+        
+        if(r_Hours=10) then
+            r_Hours <= 0;
+            r_TensOfHours <= r_TensOfHours+1;
+        end if;
+        
+        if(r_TensOfHours=2 and r_Hours=4)then
+            r_TensOfHours<=0;
+            r_Hours <=0;
+        end if;
+
+    r_CNT_1HZ <= r_CNT_1HZ +1;
+    end if;
+    
+    end if;
+  end process p_1_HZ;
+  
+  --Output control here
+p_100_kHZ : process (i_clock) is -- Count up every second
+  begin
+    if rising_edge(i_clock) then
+    if(r_CNT_100kHZ = c_CNT_100kHZ -1) then
+      r_CNT_100kHZ <= 0;
+    elsif (r_CNT_100kHZ <4000) then -- nothing
+      o_SegCA0 <= '1';
+      o_SegCA1 <= '1';
+      o_SegCA2 <= '1';
+      o_SegCA3 <= '1';
+      o_SegDP <= '1';
+    elsif (r_CNT_100kHZ <8000) then -- 1st 7seg
+      o_SegCA0 <= '0';
+      o_SegCA1 <= '1';
+      o_SegCA2 <= '1';
+      o_SegCA3 <= '1';
+      o_SegDP <= '1';
+      case r_Minutes is
+        when 0 => 
+          o_SegA <= '0';
+          o_SegB <= '0';
+          o_SegC <= '0';
+          o_SegD <= '0';
+          o_SegE <= '0';
+          o_SegF <= '0';
+          o_SegG <= '1';
+        when 1 => 
+          o_SegA <= '1';
+          o_SegB <= '0';
+          o_SegC <= '0';
+          o_SegD <= '1';
+          o_SegE <= '1';
+          o_SegF <= '1';
+          o_SegG <= '1';
+        when 2 => 
+          o_SegA <= '0';
+          o_SegB <= '0';
+          o_SegC <= '1';
+          o_SegD <= '0';
+          o_SegE <= '0';
+          o_SegF <= '1';
+          o_SegG <= '0';
+        when 3 =>
+          o_SegA <= '0';
+          o_SegB <= '0';
+          o_SegC <= '0';
+          o_SegD <= '0';
+          o_SegE <= '1';
+          o_SegF <= '1';
+          o_SegG <= '0';				
+        when 4 => 
+          o_SegA <= '1';
+          o_SegB <= '0';
+          o_SegC <= '0';
+          o_SegD <= '1';
+          o_SegE <= '1';
+          o_SegF <= '0';
+          o_SegG <= '0';
+        when 5 => 
+          o_SegA <= '0';
+          o_SegB <= '1';
+          o_SegC <= '0';
+          o_SegD <= '0';
+          o_SegE <= '1';
+          o_SegF <= '0';
+          o_SegG <= '0';
+        when 6 => 
+          o_SegA <= '0';
+          o_SegB <= '1';
+          o_SegC <= '0';
+          o_SegD <= '0';
+          o_SegE <= '0';
+          o_SegF <= '0';
+          o_SegG <= '0';
+        when 7 => 
+          o_SegA <= '0';
+          o_SegB <= '0';
+          o_SegC <= '0';
+          o_SegD <= '1';
+          o_SegE <= '1';
+          o_SegF <= '1';
+          o_SegG <= '1';
+        when 8 => 
+          o_SegA <= '0';
+          o_SegB <= '0';
+          o_SegC <= '0';
+          o_SegD <= '0';
+          o_SegE <= '0';
+          o_SegF <= '0';
+          o_SegG <= '0';
+        when 9 => 
+          o_SegA <= '0';
+          o_SegB <= '0';
+          o_SegC <= '0';
+          o_SegD <= '0';
+          o_SegE <= '1';
+          o_SegF <= '0';
+          o_SegG <= '0';
+          when 10 => 
+      end case;
+    elsif (r_CNT_100kHZ <12000) then -- nothing
+      o_SegCA0 <= '1';
+      o_SegCA1 <= '1';
+      o_SegCA2 <= '1';
+      o_SegCA3 <= '1';
+      o_SegDP <= '1';
+    elsif (r_CNT_100kHZ <16000) then -- 2nd 7seg
+      o_SegCA0 <= '1';
+      o_SegCA1 <= '0';
+      o_SegCA2 <= '1';
+      o_SegCA3 <= '1';
+      o_SegDP <= '1';
+      case r_TensOfMinutes is
+      when 0 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '0';
+                                o_SegF <= '0';
+                                o_SegG <= '1';
+                            when 1 => 
+                                o_SegA <= '1';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '1';
+                                o_SegE <= '1';
+                                o_SegF <= '1';
+                                o_SegG <= '1';
+                            when 2 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '1';
+                                o_SegD <= '0';
+                                o_SegE <= '0';
+                                o_SegF <= '1';
+                                o_SegG <= '0';
+                            when 3 =>
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '1';
+                                o_SegF <= '1';
+                                o_SegG <= '0';                
+                            when 4 => 
+                                o_SegA <= '1';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '1';
+                                o_SegE <= '1';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                            when 5 => 
+                                o_SegA <= '0';
+                                o_SegB <= '1';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '1';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                            when 6 => 
+                                o_SegA <= '0';
+                                o_SegB <= '1';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '0';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                            when 7 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '1';
+                                o_SegE <= '1';
+                                o_SegF <= '1';
+                                o_SegG <= '1';
+                            when 8 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '0';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                            when 9 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '1';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                                when 10 => 
+                        end case;
+    elsif (r_CNT_100kHZ <20000) then -- nothing
+      o_SegCA0 <= '1';
+      o_SegCA1 <= '1';
+      o_SegCA2 <= '1';
+      o_SegCA3 <= '1';
+      o_SegDP <= '1';
+    elsif (r_CNT_100kHZ <24000) then -- 3rd 7seg
+      o_SegCA0 <= '1';
+      o_SegCA1 <= '1';
+      o_SegCA2 <= '0';
+      o_SegCA3 <= '1';
+      o_SegDP <= '0';
+      case r_Hours is
+      when 0 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '0';
+                                o_SegF <= '0';
+                                o_SegG <= '1';
+                            when 1 => 
+                                o_SegA <= '1';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '1';
+                                o_SegE <= '1';
+                                o_SegF <= '1';
+                                o_SegG <= '1';
+                            when 2 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '1';
+                                o_SegD <= '0';
+                                o_SegE <= '0';
+                                o_SegF <= '1';
+                                o_SegG <= '0';
+                            when 3 =>
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '1';
+                                o_SegF <= '1';
+                                o_SegG <= '0';                
+                            when 4 => 
+                                o_SegA <= '1';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '1';
+                                o_SegE <= '1';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                            when 5 => 
+                                o_SegA <= '0';
+                                o_SegB <= '1';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '1';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                            when 6 => 
+                                o_SegA <= '0';
+                                o_SegB <= '1';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '0';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                            when 7 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '1';
+                                o_SegE <= '1';
+                                o_SegF <= '1';
+                                o_SegG <= '1';
+                            when 8 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '0';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                            when 9 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '1';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                                when 10 => 
+                        end case;
+    elsif (r_CNT_100kHZ <28000) then -- nothing	
+      o_SegCA0 <= '1';
+      o_SegCA1 <= '1';
+      o_SegCA2 <= '1';
+      o_SegCA3 <= '1';
+      o_SegDP <= '1';
+    else -- 4th 7seg
+      o_SegCA0 <= '1';
+      o_SegCA1 <= '1';
+      o_SegCA2 <= '1';
+      o_SegCA3 <= '0';
+      o_SegDP <= '1';
+      case r_TensOfHours is
+      when 0 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '0';
+                                o_SegF <= '0';
+                                o_SegG <= '1';
+                            when 1 => 
+                                o_SegA <= '1';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '1';
+                                o_SegE <= '1';
+                                o_SegF <= '1';
+                                o_SegG <= '1';
+                            when 2 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '1';
+                                o_SegD <= '0';
+                                o_SegE <= '0';
+                                o_SegF <= '1';
+                                o_SegG <= '0';
+                            when 3 =>
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '1';
+                                o_SegF <= '1';
+                                o_SegG <= '0';                
+                            when 4 => 
+                                o_SegA <= '1';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '1';
+                                o_SegE <= '1';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                            when 5 => 
+                                o_SegA <= '0';
+                                o_SegB <= '1';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '1';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                            when 6 => 
+                                o_SegA <= '0';
+                                o_SegB <= '1';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '0';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                            when 7 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '1';
+                                o_SegE <= '1';
+                                o_SegF <= '1';
+                                o_SegG <= '1';
+                            when 8 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '0';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                            when 9 => 
+                                o_SegA <= '0';
+                                o_SegB <= '0';
+                                o_SegC <= '0';
+                                o_SegD <= '0';
+                                o_SegE <= '1';
+                                o_SegF <= '0';
+                                o_SegG <= '0';
+                        end case;
+    end if;
+    r_CNT_100kHZ <= r_CNT_100kHZ +1;
+    end if;
+  end process p_100_kHZ;
+  
+  
+  
+    p_100_MHZ : process (i_clock) is -- Control LEDs every clock cycle
+  begin
+    if rising_edge(i_clock) then
+  
+  case r_Seconds is
+  when 0 =>
+  o_LED0 <= '0';
+  o_LED1 <= '0';
+  o_LED2 <= '0';
+  o_LED3 <= '0';
+  o_LED4 <= '0';
+  o_LED5 <= '0';
+  o_LED6 <= '0';
+  o_LED7 <= '0';
+  o_LED8 <= '0';
+  when 1 =>
+  o_LED0 <= '1';
+  when 2 =>
+  o_LED1 <= '1';
+  when 3 =>
+  o_LED2 <= '1';
+  when 4 =>
+  o_LED3 <= '1';
+  when 5 =>
+  o_LED4 <= '1';
+  when 6 =>
+  o_LED5 <= '1';
+  when 7 =>
+  o_LED6 <= '1';
+  when 8 =>
+  o_LED7 <= '1';
+  when 9 =>
+  o_LED8 <= '1';
+  when 10 =>
+  end case;
+  
+  case r_TensOfSeconds is
+  when 0 =>
+  o_LED15 <= '0';
+  o_LED14 <= '0';
+  o_LED13 <= '0';
+  o_LED12 <= '0';
+  o_LED11 <= '0';
+  when 1 =>
+  o_LED15 <= '1';
+  when 2 =>
+  o_LED14 <= '1';
+  when 3 =>
+  o_LED13 <= '1';
+  when 4 =>
+  o_LED12 <= '1';
+  when 5 =>
+  o_LED11 <= '1';
+  when 6 =>
+  end case;
+  
+              
+    end if;
+  end process p_100_MHZ;
+  
+
+
+end rtl;
+</code></pre>
+
+<pre><code class="language-vhdl">## Clock signal
+set_property PACKAGE_PIN W5 [get_ports i_clock]
+set_property IOSTANDARD LVCMOS33 [get_ports i_clock]
+create_clock -period 10.000 -name sys_clk_pin -waveform {0.000 5.000} -add [get_ports i_clock]
+
+## LEDs
+set_property PACKAGE_PIN U16 [get_ports o_LED0]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED0]
+set_property PACKAGE_PIN E19 [get_ports o_LED1]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED1]
+set_property PACKAGE_PIN U19 [get_ports o_LED2]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED2]
+set_property PACKAGE_PIN V19 [get_ports o_LED3]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED3]
+set_property PACKAGE_PIN W18 [get_ports o_LED4]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED4]
+set_property PACKAGE_PIN U15 [get_ports o_LED5]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED5]
+set_property PACKAGE_PIN U14 [get_ports o_LED6]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED6]
+set_property PACKAGE_PIN V14 [get_ports o_LED7]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED7]
+set_property PACKAGE_PIN V13 [get_ports o_LED8]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED8]
+set_property PACKAGE_PIN U3 [get_ports o_LED11]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED11]
+set_property PACKAGE_PIN P3 [get_ports o_LED12]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED12]
+set_property PACKAGE_PIN N3 [get_ports o_LED13]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED13]
+set_property PACKAGE_PIN P1 [get_ports o_LED14]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED14]
+set_property PACKAGE_PIN L1 [get_ports o_LED15]
+set_property IOSTANDARD LVCMOS33 [get_ports o_LED15]
+
+
+##7 segment display
+set_property PACKAGE_PIN W7 [get_ports o_SegA]
+set_property IOSTANDARD LVCMOS33 [get_ports o_SegA]
+set_property PACKAGE_PIN W6 [get_ports o_SegB]
+set_property IOSTANDARD LVCMOS33 [get_ports o_SegB]
+set_property PACKAGE_PIN U8 [get_ports o_SegC]
+set_property IOSTANDARD LVCMOS33 [get_ports o_SegC]
+set_property PACKAGE_PIN V8 [get_ports o_SegD]
+set_property IOSTANDARD LVCMOS33 [get_ports o_SegD]
+set_property PACKAGE_PIN U5 [get_ports o_SegE]
+set_property IOSTANDARD LVCMOS33 [get_ports o_SegE]
+set_property PACKAGE_PIN V5 [get_ports o_SegF]
+set_property IOSTANDARD LVCMOS33 [get_ports o_SegF]
+set_property PACKAGE_PIN U7 [get_ports o_SegG]
+set_property IOSTANDARD LVCMOS33 [get_ports o_SegG]
+
+set_property PACKAGE_PIN V7 [get_ports o_SegDP]
+set_property IOSTANDARD LVCMOS33 [get_ports o_SegDP]
+
+set_property PACKAGE_PIN U2 [get_ports o_SegCA0]
+set_property IOSTANDARD LVCMOS33 [get_ports o_SegCA0]
+set_property PACKAGE_PIN U4 [get_ports o_SegCA1]
+set_property IOSTANDARD LVCMOS33 [get_ports o_SegCA1]
+set_property PACKAGE_PIN V4 [get_ports o_SegCA2]
+set_property IOSTANDARD LVCMOS33 [get_ports o_SegCA2]
+set_property PACKAGE_PIN W4 [get_ports o_SegCA3]
+set_property IOSTANDARD LVCMOS33 [get_ports o_SegCA3]
+
+
+##Buttons
+set_property PACKAGE_PIN U18 [get_ports UpMins]
+  set_property IOSTANDARD LVCMOS33 [get_ports UpMins]
+
+set_property BITSTREAM.GENERAL.COMPRESS TRUE [current_design]
+set_property BITSTREAM.CONFIG.CONFIGRATE 33 [current_design]
+set_property CONFIG_MODE SPIx4 [current_design]</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+    <script src="../../js/prism.js"></script>
+	
+</body>
+
+</html>
