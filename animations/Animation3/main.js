@@ -72,9 +72,12 @@ function Ball(x, y, dx, dy, radius, color,mass) {
                             else{
                                 //for no merging just remove the = from >=
                                 if((this.mass>=balls[i].mass)&&join){
+									this.dx = ((this.dx*this.mass)+(balls[i].dx*balls[i].mass))/this.mass;
+									this.dy = ((this.dy*this.mass)+(balls[i].dy*balls[i].mass))/this.mass;
                                 this.mass+=balls[i].mass;
                                 balls.splice(i, 1);
                                 this.radius=Math.round(Math.pow(this.mass*3/(4*3.14),1/3));
+								
                                 }
                             }}
                             
