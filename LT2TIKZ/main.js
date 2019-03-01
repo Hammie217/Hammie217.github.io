@@ -134,6 +134,26 @@ function SymbolLine() {
       outputString += ("\\draw(" +( parseFloat(words[2])+16 )/64 + "," +-( parseFloat(words[3])+0 )/64 + ")\nto[D] (" + ( parseFloat(words[2])+16 )/64 + "," +-( parseFloat(words[3])+80 )/64  + ");\n");
     }
   }
+  else if (words[1] == "cap") {
+    words2 = inputMessage[i + 1].split(" ");
+    console.log(words2[0], words2[4])
+    if ((words2[0] == "WINDOW") && (words2[4] == "VBottom")) {
+      //res90
+      outputString += ("\\draw(" + ((words[2] - 0) / 64) + "," + -( parseFloat(words[3])+16 )/64 + ")\nto[C] (" + ((words[2] - 64) / 64) + "," + -( parseFloat(words[3])+16 )/64 + ");\n");
+    }
+    else if ((words2[0] == "WINDOW") && (words2[4] == "VTop")) {
+      //res270
+      outputString += ("\\draw(" +( parseFloat(words[2])+0 )/64 + "," +-( parseFloat(words[3])-16 )/64 + ")\nto[C] (" + ( parseFloat(words[2])+64 )/64 + "," +-( parseFloat(words[3])-16 )/64  + ");\n");
+    }
+    else if ((words2[0] == "WINDOW") && (words2[4] == "Left")) {
+      //res180
+      outputString += ("\\draw(" +( parseFloat(words[2])-16 )/64 + "," +-( parseFloat(words[3])-0 )/64 + ")\nto[C] (" + ( parseFloat(words[2])-16 )/64 + "," +-( parseFloat(words[3])-64 )/64  + ");\n");
+    }
+    else {
+      //resLine();
+      outputString += ("\\draw(" +( parseFloat(words[2])+16 )/64 + "," +-( parseFloat(words[3])+0 )/64 + ")\nto[C] (" + ( parseFloat(words[2])+16 )/64 + "," +-( parseFloat(words[3])+64 )/64  + ");\n");
+    }
+  }
 
   else if (words[1] == "npn") {
     transistorCount++;
