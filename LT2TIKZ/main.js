@@ -13,7 +13,7 @@ function myFunction() {
   length = inputMessage.length;
 
 
-  outputString = "\\adjustbox{max width=\\textwidth}{\n\\begin{circuitikz}[american, european resistors]\n";
+  outputString = "\\adjustbox{max width=\\textwidth}{\n\\begin{circuitikz}\n";
 
   i = 0
   transistorCount =0;
