@@ -4,6 +4,7 @@ var inputMessage
 var length
 var i
 var words
+var transistorCount
 
 function myFunction() {
   x = document.getElementById("message").value;
@@ -14,6 +15,7 @@ function myFunction() {
   outputString = "\\begin{circuitikz}[american, european resistors]\n";
 
   i = 0
+  transistorCount =0;
   while (i < length) {
     try{
       inputMessage[i]= escape(inputMessage[i]).replace(/%00/g,'');
@@ -109,6 +111,53 @@ function SymbolLine() {
     else {
       //resLine();
       outputString += ("\\draw(" +( parseFloat(words[2])+0)/64 + "," +-( parseFloat(words[3])+16 )/64 + ")\nto[V] (" + ( parseFloat(words[2])+0 )/64 + "," +-( parseFloat(words[3])+96 )/64  + ");\n");
+    }
+  }
+
+  else if (words[1] == "diode") {
+    words2 = inputMessage[i + 1].split(" ");
+    console.log(words2[0], words2[4])
+    if ((words2[0] == "WINDOW") && (words2[4] == "VBottom")) {
+      //res90
+      outputString += ("\\draw(" + ((words[2] - 0) / 64) + "," + -( parseFloat(words[3])+16 )/64 + ")\nto[D] (" + ((words[2] - 80) / 64) + "," + -( parseFloat(words[3])+16 )/64 + ");\n");
+    }
+    else if ((words2[0] == "WINDOW") && (words2[4] == "VTop")) {
+      //res270
+      outputString += ("\\draw(" +( parseFloat(words[2])+0 )/64 + "," +-( parseFloat(words[3])-16 )/64 + ")\nto[D] (" + ( parseFloat(words[2])+80 )/64 + "," +-( parseFloat(words[3])-16 )/64  + ");\n");
+    }
+    else if ((words2[0] == "WINDOW") && (words2[4] == "Left")) {
+      //res180
+      outputString += ("\\draw(" +( parseFloat(words[2])-16 )/64 + "," +-( parseFloat(words[3])-0 )/64 + ")\nto[D] (" + ( parseFloat(words[2])-16 )/64 + "," +-( parseFloat(words[3])-80 )/64  + ");\n");
+    }
+    else {
+      //resLine();
+      outputString += ("\\draw(" +( parseFloat(words[2])+16 )/64 + "," +-( parseFloat(words[3])+0 )/64 + ")\nto[D] (" + ( parseFloat(words[2])+16 )/64 + "," +-( parseFloat(words[3])+80 )/64  + ");\n");
+    }
+  }
+
+  else if (words[1] == "npn") {
+    transistorCount++;
+    console.log(words[4])
+    if ((words[4] == "R90") ) {
+      //res90	
+      outputString += ("\\draw ("+( parseFloat(words[2])-48 )/64 +"," +-( parseFloat(words[3])+64 )/64 +") node[npn,rotate=-90](npn"+transistorCount +") {};\n");
+      outputString += ("\\draw (npn"+transistorCount+".B) to[short]("+( parseFloat(words[2])-48 )/64 +","+-( parseFloat(words[3])-0 )/64 +");");
+
+    }
+    else if ((words[4] == "R270") ) {
+      //res270
+      outputString += ("\\draw ("+( parseFloat(words[2])+48 )/64 +"," +-( parseFloat(words[3])-64 )/64 +") node[npn,rotate=90](npn"+transistorCount +") {};\n");
+      outputString += ("\\draw (npn"+transistorCount+".B) to[short]("+( parseFloat(words[2])+48 )/64 +","+-( parseFloat(words[3])-0 )/64 +");");
+    }
+    else if ((words[4] == "R180") ) {
+      //res180
+      outputString += ("\\draw ("+( parseFloat(words[2])-64 )/64 +"," +-( parseFloat(words[3])-48 )/64 +") node[npn,rotate=180](npn"+transistorCount +") {};\n");
+      outputString += ("\\draw (npn"+transistorCount+".B) to[short]("+( parseFloat(words[2])-0 )/64 +","+-( parseFloat(words[3])-48 )/64 +");");
+    }
+    else {
+      //resLine();
+      outputString += ("\\draw ("+( parseFloat(words[2])+64 )/64 +"," +-( parseFloat(words[3])+48 )/64 +") node[npn](npn"+transistorCount +") {};\n");
+      outputString += ("\\draw (npn"+transistorCount+".B) to[short]("+( parseFloat(words[2])-0 )/64 +","+-( parseFloat(words[3])+48 )/64 +");");
     }
   }
 
