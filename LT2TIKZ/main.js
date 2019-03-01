@@ -13,7 +13,7 @@ function myFunction() {
   length = inputMessage.length;
 
 
-  outputString = "\\begin{circuitikz}[american, european resistors]\n";
+  outputString = "\\adjustbox{max width=\\textwidth}{\n\\begin{circuitikz}[american, european resistors]\n";
 
   i = 0
   transistorCount =0;
@@ -48,6 +48,7 @@ function myFunction() {
   }
     i++;
   };
+  outputString +="\\end{circuitikz}\n}"
 
 
   document.getElementById("outputZone").value = outputString;
