@@ -5,6 +5,7 @@ var length
 var i
 var words
 var transistorCount
+var opampCount
 
 function myFunction() {
   x = document.getElementById("message").value;
@@ -16,6 +17,7 @@ function myFunction() {
 
   i = 0
   transistorCount =0;
+  opampCount = 0;
   while (i < length) {
     try{
       inputMessage[i]= escape(inputMessage[i]).replace(/%00/g,'');
@@ -179,6 +181,33 @@ function SymbolLine() {
       outputString += ("\\draw ("+( parseFloat(words[2])+64 )/64 +"," +-( parseFloat(words[3])+48 )/64 +") node[npn](npn"+transistorCount +") {};\n");
       outputString += ("\\draw (npn"+transistorCount+".B) to[short]("+( parseFloat(words[2])-0 )/64 +","+-( parseFloat(words[3])+48 )/64 +");");
     }
+  }
+
+  else if (words[1].includes("Opamp")) {
+    transistorCount++;
+    /*
+    if ((words[4] == "R90") ) {
+      //res90	
+      outputString += ("\\draw ("+( parseFloat(words[2])-48 )/64 +"," +-( parseFloat(words[3])+64 )/64 +") node[npn,rotate=-90](npn"+transistorCount +") {};\n");
+      outputString += ("\\draw (npn"+transistorCount+".B) to[short]("+( parseFloat(words[2])-48 )/64 +","+-( parseFloat(words[3])-0 )/64 +");");
+
+    }
+    else if ((words[4] == "R270") ) {
+      //res270
+      outputString += ("\\draw ("+( parseFloat(words[2])+48 )/64 +"," +-( parseFloat(words[3])-64 )/64 +") node[npn,rotate=90](npn"+transistorCount +") {};\n");
+      outputString += ("\\draw (npn"+transistorCount+".B) to[short]("+( parseFloat(words[2])+48 )/64 +","+-( parseFloat(words[3])-0 )/64 +");");
+    }
+    else if ((words[4] == "R180") ) {
+      //res180
+      outputString += ("\\draw ("+( parseFloat(words[2])-64 )/64 +"," +-( parseFloat(words[3])-48 )/64 +") node[npn,rotate=180](npn"+transistorCount +") {};\n");
+      outputString += ("\\draw (npn"+transistorCount+".B) to[short]("+( parseFloat(words[2])-0 )/64 +","+-( parseFloat(words[3])-48 )/64 +");");
+    }
+    else {
+      */
+      //resLine();
+      opampCount++;
+      outputString += "\\draw ("+( parseFloat(words[2])-0 )/64+","+-( parseFloat(words[2])+80)/64 +") node[op amp,scale=0.51](opamp"+opampCount +") {};\n"
+    //}
   }
 
 }
