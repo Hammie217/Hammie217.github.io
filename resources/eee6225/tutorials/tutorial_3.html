@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee6225/tutorials/tutorial_3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2015 08:36:50 GMT -->
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee6225/tutorials/tutorial_3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Sep 2017 15:55:07 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>EEE6225 Systems Design</title>
+<link href="../../eeeteach.css" rel="stylesheet" type="text/css" /><!--[if IE]>
+<style type="text/css"> 
+/* place css fixes for all versions of IE in this conditional comment */
+.thrColHybHdr #sidebar1, .thrColHybHdr #sidebar2 { padding-top: 30px; }
+.thrColHybHdr #mainContent { zoom: 1; padding-top: 15px; }
+/* the above proprietary zoom property gives IE the hasLayout it needs to avoid several bugs */
+</style>
+<![endif]-->
+</head>
+
+<body class="thrColLiqHdr">
+
+<div id="container">
+  <div id="header">
+    <h1><img src="../../banner.gif" width="480" height="60" alt="eee banner" /></h1>
+  <!-- end #header --></div>
+  <div id="sidebar1">
+    <p><a href="http://www.shef.ac.uk/eee">EEE Home</a></p>
+    <p><a href="../../index-2.html">All Years</a></p>
+    <p><a href="../../first.html">First Year</a></p>
+    <p><a href="../../second.html">Second Year</a></p>
+    <p><a href="../../third.html">Third Year</a></p>
+    <p><a href="../../fourth.html">Fourth Year</a></p>
+    <p><a href="../../msc.html" class="hilight">MSc Courses</a><br />
+      <!-- end #sidebar1 -->
+    </p>
+  </div>
+ 
+  <div id="mainContent">
+    <h1>EEE6225 Systems Design</h1>
+    
+<table border="0" width="100%">
+<tr>
+      <td colspan="3" class="tblue"><span class="tbluet">Tutorial 3: Designing a GF(2<sup>4</sup>)
+Multiplier
+      </span></td>
+    </tr>
+    <tr>
+      <td colspan="3"><p>In this tutorial, you
+will design and test a GF(2<sup>4</sup>) multiplier. An algorithm for
+the multiplication process is shown -below, but is generalised to GF(2<sup>m</sup>),
+where m is any integer number.</p><p>
+We need to compute :</p></td>
+    </tr>
+    <tr>
+      <td width="66">&nbsp;</td>
+      <td colspan="2" ><p>P(x) = A(x).B(x) mod F(x)</p></td>
+    </tr>
+    <tr>
+      <td colspan="3" ><p>where the irreducible polynomial over GF(2) is</p></td>
+    </tr>
+    <tr>
+      <td  width="66">&nbsp;</td>
+      <td colspan="2"><p>F(x) = x<sup>m</sup> + f<sub>m-1</sub>x<sup>m-1</sup>
++ f<sub>m-2</sub>x<sup>m-2</sup>
++ &#8230;. + f<sub>1</sub>x + f<sub>0</sub></p></td>
+    </tr>
+    <tr>
+      <td colspan="3"><p>A(x), B(x) and P(x) are elements
+of the field GF(2<sup>m</sup>).</p></td>
+    </tr>
+    <tr>
+      <td width="66">&nbsp;</td>
+      <td colspan="2" ><p>A(x) = a<sub>m-1</sub>x<sup>m-1</sup>
++ a<sub>m-2</sub>x<sup>m-2</sup>
++ &#8230;. + a<sub>1</sub>x + a<sub>0</sub> <br>
+      <br>
+B(x) = b<sub>m-1</sub>x<sup>m-1</sup> + b<sub>m-2</sub>x<sup>m-2</sup>
++ &#8230;. + b<sub>1</sub>x + b<sub>0</sub> <br>
+      <br>
+P(x) = p<sub>m-1</sub>x<sup>m-1</sup> + p<sub>m-2</sub>x<sup>m-2</sup>
++ &#8230;. + p<sub>1</sub>x + p<sub>0</sub> <br>
+</p></td>
+    </tr>
+    <tr>
+      <td colspan="3" ><p>and a<sub>i</sub>, b<sub>i</sub>, p<sub>i</sub>
+and f<sub>i</sub> are
+binary, where i = 0 &#8230;. m-1</p>
+      <p>We can write P(x) as:</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" width="66">P(x)</td>
+      <td colspan="2">= A(x) { b<sub>m-1</sub>x<sup>m-1</sup>
++ b<sub>m-2</sub>x<sup>m-2</sup> + &#8230;. + b<sub>1</sub>x + b<sub>0</sub>}
+mod F(x)<br>
+      <br>
+= { A(x) b<sub>m-1</sub>x<sup>m-1</sup> mod F(x) + A(x) b<sub>m-2</sub>x<sup>m-2</sup>
+mod F(x)<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; + &#8230;. + A(x) b<sub>0</sub>
+mod F(x) }mod F(x) </td>
+    </tr>
+    <tr>
+      <td colspan="3" ><p>Starting with the first
+term , let</p></td>
+    </tr>
+    <tr>
+      <td  valign="top" width="66">K<sub>1</sub>(x)</td>
+      <td colspan="2" >= A(x) b<sub>m-1</sub>x<sup>m-1</sup>
+mod F(x)<br>
+      <br>
+= { A(x) b<sub>m-1</sub> mod F(x).x } x<sup>m-2</sup> mod F(x)<br>
+      <br>
+= P<sub>1</sub>(x) x<sup>m-2</sup> mod F(x)<br>
+&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="3" >where P<sub>1</sub>(x) =
+A(x) b<sub>m-1</sub> mod F(x).x<br>
+&nbsp;</td>
+    </tr>
+    <tr>
+      <td valign="top" width="66">K<sub>2</sub>(x)</td>
+      <td colspan="2" >= K<sub>1</sub>(x) +
+A(x) b<sub>m-2</sub>x<sup>m-2</sup> mod F(x)<br>
+      <br>
+= { P<sub>1</sub>(x) + A(x) b<sub>m-2</sub> } x<sup>m-2</sup> mod F(x)<br>
+      <br>
+= { [P<sub>1</sub>(x) + A(x) b<sub>m-2</sub> ] mod F(x).x}.x<sup>m-3</sup>
+mod F(x)<br>
+      <br>
+= P<sub>2</sub>(x) . x<sup>m-3</sup> mod F(x)<br>
+&nbsp;</td>
+    </tr>
+    <tr>
+      <td > <br>
+      </td>
+      <td > <br>
+      </td>
+      <td>.<br>
+.<br>
+.<br>
+.<br>
+.</td>
+    </tr>
+    <tr>
+      <td colspan="3" >where P<sub>2</sub>(x) =
+[P<sub>1</sub>(x) + A(x) b<sub>m-2</sub> ] mod F(x).x.<br>
+&nbsp;</td>
+    </tr>
+    <tr>
+      <td  valign="top" width="66">K<sub>m-1</sub>(x)</td>
+      <td colspan="2" > &nbsp;= K<sub>m-2</sub>(x)
++ A(x) b<sub>1</sub>.x mod F(x)<br>
+      <br>
+= { P<sub>m-2</sub>(x) + A(x) b<sub>1</sub> }x mod F(x)<br>
+      <br>
+= { [P<sub>m-2</sub>(x) + A(x) b<sub>1</sub>] mod F(x).x}mod F(x)<br>
+      <br>
+= P<sub>m-1</sub>(x) mod F(x)<br>
+&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="3" > where P<sub>m-1</sub>(x)
+= [P<sub>m-2</sub>(x) + A(x) b<sub>1</sub> ] mod F(x).x.<br>
+      <br>
+Hence,<br>
+&nbsp;</td>
+    </tr>
+    <tr>
+      <td valign="top" width="66"> K<sub>m</sub>(x)</td>
+      <td colspan="2" > = K<sub>m-1</sub>(x) +
+A(x) b<sub>0</sub> mod F(x)<br>
+      <br>
+= { P<sub>m-1</sub>(x) + A(x) b<sub>0</sub> }mod F(x)<br>
+      <br>
+= P<sub>m</sub>(x) mod F(x)<br>
+      <br>
+= the final product P(x).<br>
+&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="3" > From the equations
+above, it can be seen that a multiplication operation can be broken
+down into <i><b>m</b></i> shift and add operations.<br>
+&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="3" class="tblue" >Multiplication
+Algorithm</td>
+    </tr>
+    <tr>
+      <td colspan="3" >
+      <pre>P(x) = zero<br>for i = m-1 downto 0 do<br>    -- Part A<br>    if b<sub>i</sub> == 1 then<br>         if p<sub>m</sub> == 1 then<br>             P(x) = P(x) + F(x) + A(x);<br>         else<br>             P(x) = P(x) + A(x);<br>         end if;<br>    else<br>         if p<sub>m</sub> == 1 then<br>             P(x) = P(x) + F(x);<br>         else<br>             P(x) = P(x);<br>         end if;<br>    end if;<br>    -- End of Part A<br>    -- Part B<br>    if i &sup1; 0 then<br>        P(x) = P(x).x<br>    end if;<br>    -- End of Part B<br>end loop;</pre>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" >
+      <p align="center"> <img src="images/gf_mult.jpg" border="0"
+ height="570" width="603"></p>
+      <p align="center"><font size="2"><i>Figure 3 : GF(2<sup>4</sup>)
+Multiplication<br>
+&nbsp;</i></font></p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" >The cascaded Bit Slice
+shown in Figure 2 can be used to implement the GF(2<sup>4</sup>)
+multiplier. In fact, you can stack 4 of them one on top of one another
+with suitable interconnections to implement the GF(2<sup>4</sup>)
+multiplier or just use one to compute the product iteratively by
+feeding the partial product back into the cascaded Bit Slice.</td>
+    </tr>
+    <tr>
+      <td colspan="3" ><a
+ href="exercise_3.html">Exercise</a></td>
+    </tr>
+</table>
+<!-- end #mainContent -->
+  </div>
+	<!-- This clearing element should immediately follow the #mainContent div in order to force the #container div to contain all child floats --><br class="clearfloat" />
+   <div id="footer">
+    <div id="footer2">
+      <div id="footerLeft">© 2014 The University of Sheffield </div>
+    </div>
+    <p>&nbsp;</p>
+  <!-- end #footer --></div>
+<!-- end #container --></div>
+</body>
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee6225/tutorials/tutorial_3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2015 08:36:56 GMT -->
+
+<!-- Mirrored from hercules.shef.ac.uk/eee/teach/resources/eee6225/tutorials/tutorial_3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Sep 2017 15:55:13 GMT -->
+</html>

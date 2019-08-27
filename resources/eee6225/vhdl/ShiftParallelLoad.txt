@@ -1,0 +1,36 @@
+-- Shift register with parallel load
+
+entity ShiftRegister is
+
+    Generic ( N : integer := 64 );  -- generic parameter with default value for length
+
+    Port ( clk,rst, parallel_load, shift_enable : in std_logic;
+              serial_in    : in std_logic;
+              serial_out  : out std_logic;
+              parallel_in : in std_logic_vector(N-1 downto 0));
+
+end ShiftRegister;
+
+
+
+architecture Behavioral of ShiftRegister is
+
+     signal SR : std_logic_vector(N-1 downto 0);
+
+begin
+     process (clk, rst)
+         begin
+             if rst ='1' then
+                   SR <= (others => '0');
+             elsif parallel_load = '1' then
+                   SR <= parallel_in;
+             elsif clk'event and clk='1' then
+                   if shift_enable = '1' then
+                        SR <= SR(SR'length-2 downto 0) & '0';   -- concatenation operator &
+                   end if;
+            end if;
+    end process;
+
+    serial_out <= SR(SR'length - 1);   -- MSB out
+
+end Behavioral;

@@ -1,0 +1,35 @@
+-- An example binary counter
+
+entity BinaryCounter is
+
+   Generic ( width : integer := 32 );
+
+   Port ( clk, rst, count_enable, load : in std_logic;
+          din   : in  std_logic_vector(width-1 downto 0);
+          count : out std_logic_vector(width-1 downto 0));
+
+end BinaryCounter;
+
+
+
+architecture Behavioural of BinaryCounter is
+
+   signal value : std_logic_vector(width-1 downto 0);
+
+begin
+
+   process (clk, rst) begin
+         if rst='1' then
+             value <= (others => '0');           -- on asynchronous reset set all bits to zero
+         elsif rising_edge(clk) then
+                if load='1' then
+                     value <= din;	         -- load with 'din' in priority to counting
+                elsif count_enable='1' then
+                    value <= value + 1;          -- when clocked and count_enable count up
+                end if;
+         end if;
+   end process;
+
+   count <= value;
+
+end Behavioural;

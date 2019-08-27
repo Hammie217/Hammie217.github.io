@@ -270,7 +270,10 @@ span{
     text-align: center;
     padding-top: 30px;
 }
-
+.about h4{
+  text-align: center;
+    padding-top: 20px;
+}
 #cv {
     width: 50%;
     margin: 100px auto;
