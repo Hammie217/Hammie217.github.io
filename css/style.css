@@ -180,6 +180,16 @@ html{
     font-style: italic;
     color: #d1726c;
 }
+
+.icon-white {
+  color: white;
+}
+
+.icon-black {
+  color: #101010;
+  opacity: 0.7;
+}
+
 .Middle2{
       text-align: center;
       margin-top: 100px;
