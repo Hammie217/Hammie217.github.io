@@ -229,7 +229,18 @@ span{
     padding-top: 30px;
   }
 
+  .imer{
+    font-size:3vw;
+  }
+  html{
+    overflow-x: hidden;
+  }
+
   @media only screen and (max-width: 1000px) {
+
+    .descrip {
+      font-size: 3vw;
+    }
     .programsHead {
         font-size: 30px!important;
         margin-left: 0px !important;
@@ -303,6 +314,14 @@ span{
 
 @media only screen and (max-width: 500px) {
 
+  .Middle .mainName{
+    font-size: 12vw;
+  }
+
+  .descrip {
+    font-size: 5vw;
+  }
+
   #about {
       left: calc(50% - 120px);
       top: 65px;
@@ -318,10 +337,4 @@ span{
         text-align: center;
         margin-top: 190px;
     }
-}
-.imer{
-  font-size:3vw;
-}
-html{
-  overflow-x: hidden;
 }
