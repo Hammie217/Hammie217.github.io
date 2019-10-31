@@ -9,7 +9,7 @@
     font-size: 20px; /* Increase font size */
     color: white; /* White text color */
     border-radius: 5px 0px 0px 5px; /* Rounded corners on the top right and bottom right side */
-    z-index:1;
+    z-index: 1;
 }
 
 #mySidenav a:hover {
@@ -54,7 +54,7 @@
     padding-top: 200px;
 }
 
-.Middle{
+.Middle {
       width:100%;
       /*top:40%;*/
       margin: 0 auto;
@@ -62,9 +62,8 @@
   }
 .mainName{
     color: white;
-    /* font-family: 'Comfortaa', cursive; */
     font-size: 8vw;
-    font-family: 'Comfortaa', cursive;
+    font-family: 'Comfortaa', sans-serif;
     letter-spacing: 2px;
     font-weight: 700;
     padding-top: 50px;
@@ -72,7 +71,7 @@
 }
 .UppermainName{
     color: white;
-    font-family: 'Comfortaa', cursive;
+    font-family: 'Comfortaa', sans-serif;
     font-size: 7vw;
 }
 
@@ -230,7 +229,18 @@ span{
     padding-top: 30px;
   }
 
+  .imer{
+    font-size:3vw;
+  }
+  html{
+    overflow-x: hidden;
+  }
+
   @media only screen and (max-width: 1000px) {
+
+    .descrip {
+      font-size: 3vw;
+    }
     .programsHead {
         font-size: 30px!important;
         margin-left: 0px !important;
@@ -304,6 +314,14 @@ span{
 
 @media only screen and (max-width: 500px) {
 
+  .Middle .mainName{
+    font-size: 12vw;
+  }
+
+  .descrip {
+    font-size: 5vw;
+  }
+
   #about {
       left: calc(50% - 120px);
       top: 65px;
@@ -319,10 +337,4 @@ span{
         text-align: center;
         margin-top: 190px;
     }
-}
-.imer{
-  font-size:3vw;
-}
-html{
-  overflow-x: hidden;
 }
