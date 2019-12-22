@@ -14,7 +14,7 @@ input[type='radio'] {
 .labelClass{
     color: #222222;
     font-family: 'Montserrat', sans-serif;
-   font-size: 1.5vw;
+   font-size: 2vw;
 }
 label{
     transition: 0.5s;
