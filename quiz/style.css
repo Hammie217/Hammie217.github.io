@@ -1,0 +1,34 @@
+input[type='radio'] {
+    transform: scale(2); 
+    position: absolute;
+    margin-left: -30px ;
+    margin-top: 5px;
+}
+
+
+  
+  input[type=radio]:checked ~ label{
+    color: #fff;
+}
+  
+.labelClass{
+    color: #222222;
+    font-family: 'Montserrat', sans-serif;
+   font-size: 1.5vw;
+}
+label{
+    transition: 0.5s;
+}
+
+#divHover:hover .labelClass{
+	color: #fff;
+}
+
+#divHover{
+    cursor:pointer;
+}
+
+
+input[type=radio] {
+    display:none;
+ }

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Stardos+Stencil"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Comfortaa:700"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Test Page!</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-140500772-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-140500772-1');
+    </script>
+  </head>
+
+  <body class="BackInBlack" onload="loadedFunc()">
+    <div id="mySidenav" class="sidenav">
+      <a href="../index.html" id="about">Home</a>
+      <a href="../reports.html" id="blog">Reports</a>
+      <a href="../programs.html" id="projects">Programs</a>
+      <a href="../about.html" id="contact">About</a>
+    </div>
+
+    <div class="Middle2">
+      <h1 class="UppermainName">EEE Quiz</h1>
+    <div class="container">
+        <div id="question" class="reportsHead">Question</div>
+        <div class="row">
+            <div class="col-6" style="justify-content: center;">
+              <div id="whole">
+              <div id="divHover" onclick="divClicked(0)" style="background-color: #d1726c; border-radius: 5px 5px 5px 5px;padding: 7px 7px 7px 7px;width:50%; display: inline-block;">
+                <input type="radio" name="input" value="1" /><label id="Aone" for="1" class="labelClass" >One</label><br>
+              </div>
+              <div onclick="divClicked(1)" style=" background-color: rgb(214, 203, 105); border-radius: 5px 5px 5px 5px; margin-top: 10px;padding: 7px 0px 7px 0px;width:50%;display: inline-block;"id="divHover">
+                <input type="radio" name="input" value="2"><label id="Atwo" for="2" class="labelClass">Two</label><br>
+              </div>
+              <div onclick="divClicked(2)" style="background-color: rgb(115, 190, 117); border-radius: 5px 5px 5px 5px;margin-top: 10px;padding: 7px 0px 7px 0px;width:50%;display: inline-block;"id="divHover">
+                <input type="radio" name="input" value="3"><label id="Athree" for="3" class="labelClass">Three</label><br>
+              </div>
+              <div onclick="divClicked(3)" style="background-color: rgb(81, 146, 199); border-radius: 5px 5px 5px 5px;margin-top: 10px;padding: 7px 0px 7px 0px;width:50%;display: inline-block;" id="divHover">
+                <input type="radio" name="input" value="4"><label id="Afour" for="4" class="labelClass">Four</label><br>
+              </div>
+              <br />
+                <button onclick="submit()" id="submit" style=" position: absolute;right: 0px;width:25%;border-radius: 5px 5px 5px 5px;margin-top: 10px;padding: 7px 0px 7px 0px;">Submit</button>
+            </div>
+          </div>
+            <div class="col-6">
+                <img id="Qimage" width="100%">
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="script.js"></script>
+
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+      integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+  </body>
+</html>
