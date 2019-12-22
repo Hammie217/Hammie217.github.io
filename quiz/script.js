@@ -34,6 +34,7 @@ const questions = {
 }
 var currentQuestion=0;
 var score =0;
+var winLine=[];
 var questionCount=questions.questions.length;
 function submit(){
     
@@ -52,8 +53,11 @@ function submit(){
         questions.questions.forEach(el => {
             if(el["id"]==currentQuestion){
                 if(el["correct"]==selectedValue){
-                    console.log("Correct")
+                    winLine.push("Correct")
                     score++;
+                }
+                else{
+                    winLine.push("Incorrect")
                 }
             }
         });
@@ -84,8 +88,14 @@ function loadQuestion(){
 function endQuiz(){
     document.getElementById("whole").style.display="none";
     document.getElementById("Qimage").style.display="none";
-    document.getElementById("question").innerHTML="Quiz Complete! \n You scored " +score +'/' +questionCount;           
-    
+    document.getElementById("question").innerHTML="Quiz Complete! \n You scored " +score +'/' +questionCount;   
+    document.getElementById("results").innerHTML="<br />Your answers <br />";     
+    for (let index = 0; index < questionCount; index++) {
+        
+        document.getElementById("results").innerHTML+= index + ": " +winLine[index] + "<br />";
+        
+    }
+        
 }
 
 function loadedFunc(){
