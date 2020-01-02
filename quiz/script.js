@@ -103,6 +103,5 @@ loadQuestion();
 }
 
 function divClicked(x){
-    console.log("Hello")
     document.getElementsByName('input')[x].checked=true;
 }

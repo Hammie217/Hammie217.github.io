@@ -325,3 +325,9 @@ span{
 html{
   overflow-x: hidden;
 }
+
+#HHEUButton:hover {
+  transition-duration: 1s;
+  filter: brightness(0) saturate(100%) invert(83%) sepia(26%) saturate(716%) hue-rotate(360deg) brightness(97%) contrast(93%);
+  width: 100%;
+}
