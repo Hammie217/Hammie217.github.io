@@ -334,7 +334,7 @@ html{
 
 #threeHeader{
   margin-top: 0px;
-  position: fixed;
+  position: absolute;
   top: 0px;
   z-index: 1;
 
@@ -353,17 +353,44 @@ html{
 
 .threeBelow{
   padding-top: 33.3vh;
-  position: fixed;
   top: 0px;
+  position: absolute;
   background-color: rgb(34, 34, 34);
   width: 100%;
   z-index: -1;
-  min-height: 100%;
-
 }
 
 .threeSeventyPercentWidth{
-  width: 80%;
-  padding-left: 0px;
-  margin-left: 15%;
+ width: 80%;
+ margin-left: 10%;
+}
+
+.card-title{
+    font-family: 'Playfair Display' ;
+    font-size: 2.2vw ;
+    color: white;
+}
+.card-body{
+    font-family: 'Playfair Display' ;
+    font-size: 1.3vw ;
+    padding-bottom: 0px !important;
+    color: white;
+
+}
+
+.btnTestClass{
+    position: absolute;
+    right: 10px;
+    bottom: -20px;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #73be75 !important;
+    border: #73be75 !important;;
+}
+
+.card{
+    background-color: #202020 !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
