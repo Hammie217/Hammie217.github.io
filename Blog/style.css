@@ -384,6 +384,25 @@ html{
     bottom: -20px;
 }
 
+@media only screen and (max-width: 765px) {
+    .card-title{
+        font-family: 'Playfair Display' ;
+        font-size: 25px ;
+        color: white;
+    }
+    .card-body{
+        font-family: 'Playfair Display' ;
+        font-size: 15px ;
+        padding-bottom: 0px !important;
+        color: white;
+    
+    }
+    .text-muted{
+        font-size: 10px ;
+
+    }   
+}
+
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: #73be75 !important;
     border: #73be75 !important;;
