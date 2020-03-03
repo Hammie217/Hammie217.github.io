@@ -332,38 +332,13 @@ html{
   width: 100%;
 }
 
-#threeHeader{
-  margin-top: 0px;
-  position: fixed;
-  top: 0px;
-  z-index: 1;
 
-}
-
-.threeCenterHeader{
-  text-align: center;
-  position: relative;
-  padding-top:0;
-  color: white;
-  font-size: 7vw;
-  font-family: 'Comfortaa', sans-serif;
-  z-index: 100;
-  margin-top: 0px;
-}
-
-.threeBelow{
-  padding-top: 33.3vh;
-  position: fixed;
-  top: 0px;
-  background-color: rgb(34, 34, 34);
-  width: 100%;
-  z-index: -1;
-  min-height: 100%;
-
-}
-
-.threeSeventyPercentWidth{
-  width: 80%;
+.seventyPercentWidth{
+  width: 60%;
   padding-left: 0px;
-  margin-left: 15%;
+  margin-left: 20%;
+  color: white;
+}
+.blogFont{
+  font-family: 'Playfair Display' ;
 }
