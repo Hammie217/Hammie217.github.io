@@ -318,6 +318,12 @@ span{
         text-align: center;
         margin-top: 190px;
     }
+    .seventyPercentWidth{
+      width: 90% !important;
+      padding-left: 0px;
+      margin-left: 5% !important;
+      color: white;
+    }
 }
 .imer{
   font-size:3vw;
