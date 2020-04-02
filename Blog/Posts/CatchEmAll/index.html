@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Hammie217 Blog</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="../../../css/style.css">
+	</head>
+	<body style="margin: 0;" class="BackInBlack">
+		<link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="./prettify.css" />
+    <script src="./prettify.js"></script>
+    <script>
+      window.onload = (function(){ prettyPrint(); });
+    </script>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
+
+
+		<script src="../../../js/main.js"></script>
+		<div class="Middle2">
+        <h1 class="UppermainName">Gotta Catch Em All...</h1>
+        </div>
+		<div id="mySidenav" class="sidenav">
+			<a href="../index.html" id="about">Home</a>
+			<a href="../reports.html" id="blog">Reports</a>
+			<a href="../programs.html" id="projects">Programs</a>
+			<a href="../about.html" id="contact">About</a>
+        </div>
+
+        <div class="seventyPercentWidth blogFont">
+            <hr style="border-top: 1px solid #fff;">
+            <br style="padding-top: 20px;">
+            <h1>Containers</h1>
+            <h2>Array</h2>
+            <h3>Array</h3>
+  An array container is a very thin class addition to basic C-style arrays which acts very similarly to a C++ vector except now being defined on the stack instead of the heap removing the time lost in abstraction.
+  Like normal these arrays use contiguous memory allowing for constant random access, these arrays are purely compile time meaning no memory or processing overhead at all.
+  It is useful for passing data directly between functions as, unlike C-style arrays, the size of the array is stored in the class allowing for easy data parsing in a function.
+  Std::arrays have value semantics which is a computer science term for the data is passed instead of an address meaning that you know when the data arrives it hasn't changed which is sometimes a large issue in C programming for badly-defined arrays.
+  Std::arrays are also as aggregates defined as: "An aggregate is an array or a class (clause 9) with no user-declared constructors (12.1), no private or protected non-static data members (clause 11), no base classes (clause 10), and no virtual functions (10.3).".
+  This therefore means a std::array is just as fast as C-style but with extra features as mentioned above, however it is worth noting std::array is defined in C++11 so not all compilers, unless specifically told, will understand.
+  <pre class="prettyprint lang-cpp" style="margin-top: 20px;margin-bottom: 20px;">
+    #include &lt;array&gt;
+    #include &lt;iostream&gt;
+  
+    #define ARRAYSIZE 10
+  
+    void printArray1(const std::array&lt;int, ARRAYSIZE&gt; arr){ //ensure no modification given array defined as const
+        std::cout &lt;&lt; "Array of length " &lt;&lt; arr.size() &lt;&lt;": " &lt;&lt; "&lt;";
+        for(auto i=arr.begin();i&lt;arr.end();i++){
+            std::cout &lt;&lt; ' ' &lt;&lt; *i ;
+        }
+        std::cout  &lt;&lt; " &gt;" &lt;&lt; std::endl;
+    }
+  
+    void printArray2(std::array&lt;int, ARRAYSIZE&gt; arr){
+        std::cout &lt;&lt; "Array of length " &lt;&lt; arr.size() &lt;&lt;": " &lt;&lt; "&lt;";
+        for(auto i=arr.cbegin();i&lt;arr.cend();i++){//ensure not modification given array pointers are const
+            std::cout &lt;&lt; ' ' &lt;&lt; *i ;
+        }
+        std::cout  &lt;&lt; " &gt;" &lt;&lt; std::endl;
+    }
+  
+    void printArrayReverse1(const std::array&lt;int, ARRAYSIZE&gt; arr){ //ensure no modification given array defined as const
+        std::cout &lt;&lt; "Array of length " &lt;&lt; arr.size() &lt;&lt;": " &lt;&lt; "&lt;";
+        for(auto i=arr.rbegin();i&lt;arr.rend();i++){
+            std::cout &lt;&lt; ' ' &lt;&lt; *i;
+        }
+        std::cout  &lt;&lt; " &gt;" &lt;&lt; std::endl;
+    }
+  
+    void printArrayReverse2(std::array&lt;int, ARRAYSIZE&gt; arr){
+        std::cout &lt;&lt; "Array of length " &lt;&lt; arr.size() &lt;&lt;": " &lt;&lt; "&lt;";
+        for(auto i=arr.crbegin();i&lt;arr.crend();i++){//ensure not modification given array pointers are const
+            std::cout &lt;&lt; ' ' &lt;&lt; *i ;
+        }
+        std::cout  &lt;&lt; " &gt;" &lt;&lt; std::endl;
+    }
+  
+    void editDataFromPointer(int* arrayPointer, int size){
+        for(int i=0;i&lt;size;i++){
+            *(arrayPointer+i)=i;
+        }
+    }
+  
+    int main(){
+        std::array&lt;int, ARRAYSIZE&gt; a ={0};
+        std::array&lt;int, ARRAYSIZE&gt; b ;
+        std::cout &lt;&lt; "a " &lt;&lt; (a.empty() ? "is empty" : "is not empty") &lt;&lt; std::endl;
+        std::cout &lt;&lt; "b " &lt;&lt; (b.empty() ? "is empty" : "is not empty") &lt;&lt; std::endl;
+        std::cout &lt;&lt; "a can hold " &lt;&lt; a.max_size() &lt;&lt; " Ints" &lt;&lt; std::endl;
+        std::cout &lt;&lt; "b can hold " &lt;&lt; b.max_size() &lt;&lt; " Ints" &lt;&lt; std::endl ;
+        printArray1(a);
+        a.fill(255);
+        printArray1(a);
+        //cumulate a into b
+        for(auto i=0;i&lt;a.size();i++){
+            try{
+                b.at(i)=b.at(i-1)+a.at(i);
+            }
+            catch (const std::out_of_range& e){
+                b.at(i)=a.at(i);
+            }
+        }
+        printArray2(b);
+        a.swap(b);
+        printArray2(b);
+        printArrayReverse1(a);
+        std::cout &lt;&lt; "a starting with: " &lt;&lt; a.front() &lt;&lt; std::endl;
+        std::cout &lt;&lt; "a ending with: " &lt;&lt; a.back() &lt;&lt; std::endl;
+        editDataFromPointer(b.data(),b.size());
+        printArrayReverse2(b);
+        return 0;
+    }</pre>
+            <h2>Deque</h2>
+            <h3>Deque</h3>
+            
+            <h2>Forward list</h2>
+            <h3>Forward list</h3>
+            <h2>List</h2>
+            <h3>List</h3>
+            <h2>Map</h2>
+            <h3>Map</h3>
+            <h3>Multimap</h3>
+            <h2>Queue</h2>
+            <h3>Queue</h3>
+            <h3>Priority queue</h3>
+            <h2>Set</h2>
+            <h3>Set</h3>
+            <h3>Multiset</h3>
+            <h2>Stack</h2>
+            <h3>Stack</h3>
+            <h2>Unordered map</h2>
+            <h3>Unordered map</h3>
+            <h3>Unordered multimap</h3>
+            <h2>Unordered set</h2>
+            <h3>Unordered set</h3>
+            <h3>Unordered multiset</h3>
+            <h2>Vector</h2>
+            <h3>Vector</h3>
+            <h3>Vector 	&#60;bool&#62;</h3>
+            When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+            $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+            
+        </div>
+	</body>
+</html>

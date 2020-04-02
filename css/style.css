@@ -348,3 +348,122 @@ html{
 .blogFont{
   font-family: 'Playfair Display' ;
 }
+
+
+.aboutcard{
+  width: 35vw;
+  background-color: rgba(0, 0, 0, 0);
+  color:white;
+}
+
+@media only screen and (max-width: 800px) {
+  .aboutcard{
+    width: 70vw;
+    background-color: rgba(0, 0, 0, 0);
+    color:white;
+  }
+}
+
+.aboutcard2{
+  width: 17vw;
+  background-color: rgba(0, 0, 0, 0);
+  color:white;
+}
+@media only screen and (max-width: 1000px) {
+  .aboutcard2{
+    width: 30vw;
+    background-color: rgba(0, 0, 0, 0);
+    color:white;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .aboutcard2{
+    width: 80vw;
+    background-color: rgba(0, 0, 0, 0);
+    color:white;
+  }
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .aboutcard2{
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0);
+    color:white;
+  }
+}
+
+.aboutcard3{
+  width: 23vw;
+  background-color: rgba(0, 0, 0, 0);
+  color:white;
+}
+@media only screen and (max-width: 1000px) {
+  .aboutcard3{
+    width: 35vw;
+    background-color: rgba(0, 0, 0, 0);
+    color:white;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .aboutcard3{
+    width: 80vw;
+    background-color: rgba(0, 0, 0, 0);
+    color:white;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .aboutcard3{
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0);
+    color:white;
+  }
+}
+
+.subtext{
+  color: grey;
+}
+.BottomCardText{
+  padding-bottom: 10px;
+}
+
+.PaddingDivSections{
+  padding-bottom: 20px;
+}
+
+
+
+.aboutcard4{
+  width: 10vw;
+  background-color: rgba(0, 0, 0, 0);
+  color:white;
+}
+@media only screen and (max-width: 1000px) {
+  .aboutcard4{
+    width: 20vw;
+    background-color: rgba(0, 0, 0, 0);
+    color:white;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .aboutcard4{
+    width: 30vw;
+    background-color: rgba(0, 0, 0, 0);
+    color:white;
+  }
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .aboutcard4{
+    width: 40vw;
+    background-color: rgba(0, 0, 0, 0);
+    color:white;
+  }
+}
