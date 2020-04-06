@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Hammie217 Blog</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="../../../css/style.css">
+	</head>
+	<body style="margin: 0;" class="BackInBlack">
+		<link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
+
+
+		<script src="../../../js/main.js"></script>
+		<div class="Middle2">
+        <h1 class="UppermainName">Power supply</h1>
+        </div>
+		<div id="mySidenav" class="sidenav">
+			<a href="../index.html" id="about">Home</a>
+			<a href="../reports.html" id="blog">Reports</a>
+			<a href="../programs.html" id="projects">Programs</a>
+			<a href="../about.html" id="contact">About</a>
+        </div>
+
+        <div class="seventyPercentWidth blogFont">
+            <hr style="border-top: 1px solid #fff;">
+            <br style="padding-top: 20px;">
+            <h1>Introduction</h1>
+            My first electronics project at home during university was creating a small linear power supply, I ended up using an LM317 and it wasn't exactly perfect, it used a huge and expensive transformer and capacitances far too high meaning a very slow turn off. It was also analog with no biasing meaning a minimum of 1.25V so not accurate or a brilliant range, safe to say some improvements would be nice. One good thing was the project had a nice off-white case with a 3d printed back and front plate with space for a display, potentiometer and fused IEC connector. <br/>
+            
+            The year after, I salvaged the transformer from my power supply into a new design using off the shelf buck converters, they were definitely cheap but were a bit out of spec (10V too low... whoops) and with no current limiting you sometimes began smelling a little smoke almost always from the over-volted LED. This power supply did however allow for a dual output isolated power supply with two displays showing the voltage (inaccurately but enough for the applications I was using it for) in the future I then designed a buck converter using a higher voltage and current rated internal switch buck controller. The biggest issdues this time were no current limit, inacurate display, trimmer for voltage output and very noisy voltage output. The buck converter allowed for a much more efficient and therefore higher current supply but that simply isn't what I use it for especially without a current limit.<br/>
+            
+            <img src="OTSBuck.png" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 1: Common and cheap off the shelf buck converter.</p>
+
+            <h1>Specification</h1>
+            Given the reasons above I've decided to finally put some time into designing and creating a useful power supply with the main requirements of:<br/>
+            <ol>
+              <li>Starting voltage of 0V</li>
+              <li>Linear power supply</li>
+              <li>Digital output and control</li>
+              <li>>=3.5 digit accuracy</li>
+              <li>Current limit and readout</li>
+              <li>1Amp is plenty</li>
+            </ol>
+            <h1>Design</h1>
+            To begin the design I decided I'd like to use mains power to stop the faff of dealing with batteries. Unfortunately I've very little experience with mains design given silly university regulations, the easiest solution would be to use a 50Hz transformer but they become expensive fast so a SMPS (Switch mode power supply) is the direction i'd like to take and hopefully clean up any ripple which may be easier than expected given high frequency being easier to filter but low frequency easier for active filtering. Initially I looked towards a buck converter as I needed to only drop voltage and I already have experiece with buck design but given the large voltage ratio and higher power I decided against and after some research on SEPIC converters and other designs I came across the diagram below which lead me towards a Flyback convertor and the LT1725 IC. Unfortunately despite SMPS making smaller transformers the flyback topologies seem to all require many different coupled inductors making much more complex transformers which would be even more complex. After attempting to find a seller of usefully designed coupled inductors I started to worry, thankfully during the COVID-19 crisis many old electronics in our house have been cleaned out including an old 50Hz transformer powersupply capable of delivering around 1A at 16V, this is a little low voltage than I'd like but realistically scaling the electronics should be a simple job once coming across a higher voltage power supply and I rarely use over 10V at a time where I require a clean (linear) DC voltage.
+            <img src="Topologieds.png" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 2: SMPS topologies.</p>
+
+            <h2>Input power design</h2>
+            Given the input transformer of \(16V\) (Peak \(16\sqrt{2}=22.6274V \) ) I decided to move onto LTSpice to start testing designs, the first thing that came to mind was a capacitive multiplier given the need for a stable dc input, it was designed to be as stable as possible without taking too long to rise but with a load of 200 Ohms (about 100mA) the system takes nearly a second to get towards a stable value, this could be a problem if the supply is turning on to a load already plugged in giving a very slow turn on. Having a one second turn on isn't too bad however if the power supply just decides to wait before turnning on and so I decided to attach a comparator to the output making sure the device only turns on at 18V in a more square like fasion. In the design below you can see an NPN is used but a relay would be a better solution given less loss and a binary on or off result.
+            <img src="Topologieds.png" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 2: SMPS topologies.</p>
+            After this I wondered around forgetting the capacitance multiplier and instead of driving the transistor with a capacitor, instead why not run the device straight from a op-amp reference as seen below. This creates a much faster turn on with the turn on being mostly controlled by the output capacitor C2 which is kept large to reduce ripple. After running this I took a second look at the design and realised I'd simply re-invented the wheel and created a linear regulator.
+            <img src="Topologieds.png" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 2: SMPS topologies.</p>
+            Comparing the two topologies on 1 amp loads the first version is much more steady DC output with 0.2mVpp ripple after a few seconds compared to 4mVpp ripple on the linear regulator. 
+            <img src="Topologieds.png" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 2: SMPS topologies.</p>
+
+            
+
+        </div>
+	</body>
+</html>
