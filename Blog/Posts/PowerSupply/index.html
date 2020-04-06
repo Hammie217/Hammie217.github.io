@@ -57,14 +57,29 @@
 
             <h2>Input power design</h2>
             Given the input transformer of \(16V\) (Peak \(16\sqrt{2}=22.6274V \) ) I decided to move onto LTSpice to start testing designs, the first thing that came to mind was a capacitive multiplier given the need for a stable dc input, it was designed to be as stable as possible without taking too long to rise but with a load of 200 Ohms (about 100mA) the system takes nearly a second to get towards a stable value, this could be a problem if the supply is turning on to a load already plugged in giving a very slow turn on. Having a one second turn on isn't too bad however if the power supply just decides to wait before turnning on and so I decided to attach a comparator to the output making sure the device only turns on at 18V in a more square like fasion. In the design below you can see an NPN is used but a relay would be a better solution given less loss and a binary on or off result.
-            <img src="Topologieds.png" style="width: 80%;margin-left: 10%;"><br />
-            <p style="text-align: center;">Figure 2: SMPS topologies.</p>
+            <img src="CapMul.PNG" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 3: Capacitor multipler circuit diagram.</p>
+            <img src="CapMulOut.PNG" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 4: Capacitor multipler circuit output voltage.</p>
+            <img src="SwitchedCapMul.PNG" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 5: Capacitor multipler circuit diagram with switcher.</p>
+            <img src="SwitchedCapMulOut.PNG" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 6: Capacitor multipler circuit with switcher output voltage.</p>
             After this I wondered around forgetting the capacitance multiplier and instead of driving the transistor with a capacitor, instead why not run the device straight from a op-amp reference as seen below. This creates a much faster turn on with the turn on being mostly controlled by the output capacitor C2 which is kept large to reduce ripple. After running this I took a second look at the design and realised I'd simply re-invented the wheel and created a linear regulator.
-            <img src="Topologieds.png" style="width: 80%;margin-left: 10%;"><br />
-            <p style="text-align: center;">Figure 2: SMPS topologies.</p>
-            Comparing the two topologies on 1 amp loads the first version is much more steady DC output with 0.2mVpp ripple after a few seconds compared to 4mVpp ripple on the linear regulator. 
-            <img src="Topologieds.png" style="width: 80%;margin-left: 10%;"><br />
-            <p style="text-align: center;">Figure 2: SMPS topologies.</p>
+            <img src="LinReg.PNG" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 7: Linear regulator circuit diagram.</p>
+            <img src="LinRegOut.PNG" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 8: Linear regulator circuit output voltage.</p>
+            Comparing the two topologies on 1 amp loads the first version is much more steady DC output with 0.2mVpp ripple after a few seconds compared to 4mVpp ripple on the linear regulator. Plus the output stage of the power supply is going to be a linear regulator so why not mix it up :).
+            <img src="Both.PNG" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 9: Power supply comparison.</p>
+            The next steps in the power supply design are to create the voltage reference used on U1 for the comparator and look into the possibility of turn on oscillations by the op-amp turning on and off the output if the current is too high.
+
+            To attempt the first of these two errors I'm going to start with powering a voltage reference of any size and then quantifying what gain needs to be set on the op-amp and hope for the best!
+            To make this as cheap as possible I'd like to start with simple components and only increase if nesecssary, first of all I'd like to use an LM336 and only E12 resistors, an LM336 creates a 2.5V reference and thus for 18V I need a 7.5 times gain and for a non-inverting amplifier the equation is \(gain=1+\frac{R_2}{R_1}\) and so I need \(6.5=\frac{R_2}{R_1}\), after trying many E12 combinations I found the easiest and closest method is to use 27K and 100k+68K, this used in combination with the zenner creates the desired 18V reference. I have decided to use a rail to rail op-amp attached to the pre-multiplier stage to make sure that this 18V output is reached as quickly as possible and remove the possability of the downstream LM358 Op-amp turining on the output before 18V is reached. I have used the LT1880 in simulation purely because it's built in and easy to use.
+
+            Power supply parts list:
+
 
             
 
