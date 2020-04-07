@@ -81,7 +81,7 @@
             <p style="text-align: center;">Figure 10: Power supply with internal reference.</p>
             In terms of power supply oscillation, in the worst case simulation it doesn't happen and that's enough for me :).
             Given this seems to be a almost ready design I've taken the time to translate this over to a Kicad diagram as seen below. I took the time to add a few small details such as swapping over to a relay and driving that with an NPN and a low current 5V line. I've also added a slow-blow fuse and swapping over to a non-rail-to-rail op-amp and that's all the changes.
-            <img src="Referenced.PNG" style="width: 80%;margin-left: 10%;"><br />
+            <img src="KicadPSU.PNG" style="width: 80%;margin-left: 10%;"><br />
             <p style="text-align: center;">Figure 11: Kicad circuit diagram.</p>
             Power supply parts list:
             <ul>
@@ -103,7 +103,8 @@
               <li>1 general purpose NPN transistor (To drive the relay activation coil)</li>
               
             </ul>
-            
+            <h2>Output voltage stage design</h2>
+            Next step is to create a current and voltage stage but the order depends upon a few things such as an out of spec voltage stage leakage current but if not the current stage would best come first to stop the need of over-voltaging to deal with the burden voltage in the current stage. This leads me to design the voltage stage first and simply use a 0.1 ohm sense resistor doing nothing as a placeholder for now.
 
 
             
