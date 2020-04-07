@@ -76,9 +76,34 @@
             The next steps in the power supply design are to create the voltage reference used on U1 for the comparator and look into the possibility of turn on oscillations by the op-amp turning on and off the output if the current is too high.
 
             To attempt the first of these two errors I'm going to start with powering a voltage reference of any size and then quantifying what gain needs to be set on the op-amp and hope for the best!
-            To make this as cheap as possible I'd like to start with simple components and only increase if nesecssary, first of all I'd like to use an LM336 and only E12 resistors, an LM336 creates a 2.5V reference and thus for 18V I need a 7.5 times gain and for a non-inverting amplifier the equation is \(gain=1+\frac{R_2}{R_1}\) and so I need \(6.5=\frac{R_2}{R_1}\), after trying many E12 combinations I found the easiest and closest method is to use 27K and 100k+68K, this used in combination with the zenner creates the desired 18V reference. I have decided to use a rail to rail op-amp attached to the pre-multiplier stage to make sure that this 18V output is reached as quickly as possible and remove the possability of the downstream LM358 Op-amp turining on the output before 18V is reached. I have used the LT1880 in simulation purely because it's built in and easy to use.
-
+            To make this as cheap as possible I'd like to start with simple components and only increase if nesecssary, first of all I'd like to use an LM336 and only E12 resistors, an LM336 creates a 2.5V reference and thus for 18V I need a 7.5 times gain and for a non-inverting amplifier the equation is \(gain=1+\frac{R_2}{R_1}\) and so I need \(6.5=\frac{R_2}{R_1}\), after trying many E12 combinations I found the easiest and closest method is to use 27K and 100k+68K, this used in combination with the zenner creates the desired 18V reference. I decided to use a rail to rail op-amp attached to the pre-multiplier stage to make sure that this 18V output is reached as quickly as possible and remove the possability of the downstream LM358 Op-amp turining on the output before 18V is reached but given the cost of a high voltage rail to rail op-amp and the already used method of using the pre-regulation line I may as well use the second op-amp in the LM358 package. I have used the LT1880 in simulation purely because it's built in and easy to use.
+            <img src="Referenced.PNG" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 10: Power supply with internal reference.</p>
+            In terms of power supply oscillation, in the worst case simulation it doesn't happen and that's enough for me :).
+            Given this seems to be a almost ready design I've taken the time to translate this over to a Kicad diagram as seen below. I took the time to add a few small details such as swapping over to a relay and driving that with an NPN and a low current 5V line. I've also added a slow-blow fuse and swapping over to a non-rail-to-rail op-amp and that's all the changes.
+            <img src="Referenced.PNG" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 11: Kicad circuit diagram.</p>
             Power supply parts list:
+            <ul>
+              <li>Mains connector IEC?</li>
+              <li>1 230V-16V transformer</li>
+              <li>1 Low power relay</li>
+              <li>6 Diodes</li>
+              <li>1 10mF capacitor</li>
+              <li>3 470uF capacitors</li>
+              <li>2 220R Resistors</li>
+              <li>2 10kR Resistors</li>
+              <li>1 27kR Resistor</li>
+              <li>1 100kR Resistor</li>
+              <li>1 68kR Resistor</li>
+              <li>2 TIP35 NPN transistors</li>
+              <li>1 Heatsink/fan</li>
+              <li>1 LM336</li>
+              <li>2 general purpose op-amps (LM358 but ideally cheaper)</li>
+              <li>1 general purpose NPN transistor (To drive the relay activation coil)</li>
+              
+            </ul>
+            
 
 
             
