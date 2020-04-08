@@ -105,8 +105,14 @@
             </ul>
             <h2>Output voltage stage design</h2>
             Next step is to create a current and voltage stage but the order depends upon a few things such as an out of spec voltage stage leakage current but if not the current stage would best come first to stop the need of over-voltaging to deal with the burden voltage in the current stage. This leads me to design the voltage stage first and simply use a 0.1 ohm sense resistor doing nothing as a placeholder for now.
-
-
+            <br />
+            I've taken some time to develop a design in Kicad, Unfortunately given I want to use a microcontroller to control the voltage a DAC is being used which LTSpice won't be too happy with, instead injecting fake signals and making sure the DAC is hooked up right will be best. The current design is shown below in Figure: 12.
+            <img src="voltageSide.PNG" style="width: 80%;margin-left: 10%;"><br />
+            <p style="text-align: center;">Figure 12: Kicad circuit diagram of voltage stage.</p>
+            The basis of the design is the LT3080 Low dropout (0V) regulator, this regulator can be off at 0V with the need of 500uA output constantly otherwise a voltage will be present. To meet this requirement an LM334 current source is used with a fixed current of just over 600uA, to do this the current source requires between 0.7-40V on the output, this does mean whilst the output of the power supply is off and the voltage below 0.7V there is going to be a voltage error, until I can figure out how to counteract that we will have to survive. <br />
+            The next section of the LT3080 is the set pin, the LT3080 has an  internal comparator to drive the output to the same voltage as the set pin, this is usually done with a resistor given the internal current source but if we drive the pins voltage directly we can have the output follow. To do this a DAC outputs a voltage from our processor (not yet chosen) commands, the DAC is reference to 2.048V meaning for a 12 bit system each bit drives 5uV up to a maximum of 2.048V, as our system wants to be 0-18V this must be amplified by 8.79 to get this and we do such by a simple op-amp gain circuit, this in turn amplifies the voltage per bit to just more than 4mV and as such we can now drive the voltage programattically once hooked up (This gain allows the largest range possible but isn't quite as nice as amplifying by 10 and having a 5mV per bit which might be a future update). The last thing to mention is that the 2.048V voltage is generated in the bottom left by a dedicated reference.
+            
+            After making the model in LTSpice using LM358 op-amps the model no longer works, I checked every aspect but it appears to simply be a bad LM358 model. After hunting the web for a working model I gave up and am now using another Op-Amp (LT1013) and just hoping the LM358 will work similarly. The LTSpice model can be seen below
             
 
         </div>
